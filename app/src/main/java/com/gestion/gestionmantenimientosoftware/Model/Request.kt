@@ -1,4 +1,4 @@
-package com.gestion.app_despacho.Model
+package com.gestion.gestionmantenimientosoftware.Model
 
 data class LoginRequest(
     val User: String,

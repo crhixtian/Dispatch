@@ -2,8 +2,8 @@ package com.gestion.gestionmantenimientosoftware.Utils
 
 import com.gestion.gestionmantenimientosoftware.BuildConfig
 
-object Constants {
 
+object Constants {
 
     const val APP_VERSION = "v${BuildConfig.VERSION_NAME}"
     const val OBSERVE = "OBSERVE"

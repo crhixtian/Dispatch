@@ -5,7 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.gestion.app_despacho.Model.ClsPicking
+import com.gestion.gestionmantenimientosoftware.Model.ClsPicking
 
 @Dao
 interface PickingDao {

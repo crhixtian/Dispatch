@@ -1,0 +1,12 @@
+apply plugin: 'java-library'
+configurations.maybeCreate("default")
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    files('libs/activation.jar')
+    files('libs/additionnal.jar')
+    files('libs/mail.jar')
+}
+
+sourceCompatibility = "8"
+targetCompatibility = "8"
