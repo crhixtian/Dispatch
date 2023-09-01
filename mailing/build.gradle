@@ -1,0 +1,11 @@
+apply plugin: 'java-library'
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    api files('libs/activation.jar')
+    api files('libs/additionnal.jar')
+    api files('libs/mail.jar')
+}
+
+sourceCompatibility = "8"
+targetCompatibility = "8"

@@ -1,4 +1,4 @@
-package com.gestion.app_despacho.Model
+package com.gestion.gestionmantenimientosoftware.Model
 
 import com.google.gson.annotations.SerializedName
 

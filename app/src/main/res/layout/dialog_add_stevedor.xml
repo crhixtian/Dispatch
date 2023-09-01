@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:layout_editor_absoluteX="1dp"
+    android:layout_marginVertical="5dp"
+    android:layout_marginHorizontal="50dp"
+    tools:layout_editor_absoluteY="23dp"
+    app:cardCornerRadius="20dp"
+    android:layout_gravity="center">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="20dp"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dialog_new_stevedor"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+
+                android:fontFamily="@font/nunito_regular" />
+
+            <Space
+                android:layout_width="5dp"
+                android:layout_height="0dp"/>
+
+            <TextView
+                android:id="@+id/tvDialogMaterial"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="HUECO 15 RAYA P2"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+
+                android:fontFamily="@font/nunito_bold" />
+        </LinearLayout>
+
+        <Space
+            android:layout_width="1dp"
+            android:layout_height="10dp"/>
+
+        <EditText
+            android:id="@+id/edt_dialogName"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginHorizontal="20dp"
+            android:hint="@string/name_stevedor"
+            android:textColorHint="@color/soft_gray"
+            android:textColor="@color/black"
+            android:fontFamily="@font/nunito_regular"
+            android:textAlignment="center"
+            android:inputType="textPersonName"
+            android:background="@drawable/shape_rectangle"/>
+
+        <Space
+            android:layout_width="1dp"
+            android:layout_height="10dp"/>
+
+        <EditText
+            android:id="@+id/edt_dialogDni"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginHorizontal="20dp"
+            android:hint="@string/dni_stevedor"
+            android:maxLength="8"
+            android:textColorHint="@color/soft_gray"
+            android:textColor="@color/black"
+            android:fontFamily="@font/nunito_regular"
+            android:textAlignment="center"
+            android:inputType="number"
+            android:background="@drawable/shape_rectangle"/>
+
+        <Space
+            android:layout_width="1dp"
+            android:layout_height="20dp"/>
+
+        <Button
+            android:id="@+id/btn_add_stevedor"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="20dp"
+            android:backgroundTint="@color/orange_principal"
+            android:text="@string/add_stevedor"
+            app:cornerRadius="15dp"
+            android:textSize="15sp"
+            android:fontFamily="@font/nunito_black"/>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

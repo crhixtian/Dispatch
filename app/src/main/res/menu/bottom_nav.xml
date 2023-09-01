@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title=""
+        android:id="@+id/infoPickingFragment"
+        android:icon="@drawable/info_picking_ic" />
+    <item android:title=""
+        android:id="@+id/materialsPickingFragment"
+        android:icon="@drawable/list_materials_ic"/>
+    <item android:title=""
+        android:id="@+id/stevedoresFragment"
+        android:icon="@drawable/stevedores_ic"/>
+    <item android:title=""
+        android:id="@+id/InfoUserFragment"
+        android:icon="@drawable/field_user_icon"/>
+</menu>
