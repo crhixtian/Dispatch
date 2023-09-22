@@ -77,7 +77,6 @@ class MainActivity : AppCompatActivity() {
         val permission2 = ContextCompat.checkSelfPermission(applicationContext,
             Manifest.permission.READ_EXTERNAL_STORAGE
         )
-
         return permission1 == PackageManager.PERMISSION_GRANTED && permission2 == PackageManager.PERMISSION_GRANTED
     }
 

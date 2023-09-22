@@ -34,6 +34,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvRol" />
 
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -57,11 +58,11 @@
             android:background="@color/transparent"
             android:fontFamily="@font/nunito_bold"
             android:hint="@string/hint_nbrPicking"
-            app:counterEnabled="true"
             android:inputType="number"
             android:maxLength="10"
             android:textAlignment="center"
-            android:textColorHint="@color/soft_gray" />
+            android:textColorHint="@color/soft_gray"
+            app:counterEnabled="true" />
 
         <ImageView
             android:id="@+id/imgScan"
@@ -102,7 +103,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.45" />
+        app:layout_constraintGuide_percent="0.5" />
 
     <TextView
         android:id="@+id/textView4"

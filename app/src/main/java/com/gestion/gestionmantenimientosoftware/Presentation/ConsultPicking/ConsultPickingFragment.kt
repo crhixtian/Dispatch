@@ -1,12 +1,18 @@
 package com.gestion.gestionmantenimientosoftware.Presentation.ConsultPicking
 
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.hardware.Camera
+import android.hardware.camera2.CameraAccessException
+import android.hardware.camera2.CameraManager
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import androidx.activity.OnBackPressedCallback
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.gestion.gestionmantenimientosoftware.Model.User
@@ -14,11 +20,15 @@ import com.gestion.gestionmantenimientosoftware.Presentation.Picking.PickingActi
 import com.gestion.gestionmantenimientosoftware.R
 import com.gestion.gestionmantenimientosoftware.Utils.Constants
 import com.gestion.gestionmantenimientosoftware.Utils.DialogManager
+import com.gestion.gestionmantenimientosoftware.Utils.PermissionsAwareActivity.getPackageManager
+import com.gestion.gestionmantenimientosoftware.Utils.PermissionsAwareActivity.getSystemService
 import com.gestion.gestionmantenimientosoftware.Utils.SessionManager
 import com.gestion.gestionmantenimientosoftware.Utils.Toast.Toast
 import com.gestion.gestionmantenimientosoftware.databinding.DialogLogoutBinding
 import com.gestion.gestionmantenimientosoftware.databinding.FragmentConsultPickingBinding
 import com.google.zxing.integration.android.IntentIntegrator
+import java.time.LocalTime
+
 
 class ConsultPickingFragment : Fragment(R.layout.fragment_consult_picking) {
 
@@ -27,6 +37,9 @@ class ConsultPickingFragment : Fragment(R.layout.fragment_consult_picking) {
     lateinit var globalUser: User
     private val viewModel: ConsultPickingViewModel by viewModels()
     lateinit var nrPicking: String
+    private var cameraManager: CameraManager? = null
+    private var cameraId: String? = null
+    private var isFlashOn = false
     val fragment: Fragment = this
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -36,6 +49,7 @@ class ConsultPickingFragment : Fragment(R.layout.fragment_consult_picking) {
         globalView = view
 
         binding.includeHeader.imgHome.visibility = View.GONE
+
         setupUser()
         events()
         observers()
@@ -166,6 +180,13 @@ class ConsultPickingFragment : Fragment(R.layout.fragment_consult_picking) {
         integrator.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES)
         integrator.setPrompt("Escanea un número de picking")
         integrator.setBeepEnabled(true)
+        val hourIni = LocalTime.of(18, 0)
+        val hourFin = LocalTime.of(6, 0)
+        if(LocalTime.now().isAfter(hourIni) || LocalTime.now().isBefore(hourFin)){
+            integrator.setTorchEnabled(true)
+        }else{
+            integrator.setTorchEnabled(false)
+        }
         integrator.initiateScan()
         //IntentIntegrator.forSupportFragment(fragment).initiateScan()
     }
