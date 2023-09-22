@@ -3,6 +3,16 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'org.sonarqube' version '4.2.1.3168'
+}
+
+sonar {
+    properties {
+        property('sonar.projectKey', 'MantenimientoSoftware')
+        property('sonar.organization', 'MantenimientoSoftware')
+        property('sonar.host.url', 'http://localhost:9000')
+        property('sonar.token', 'sqp_1d14f40b9090b93a6b947f840f1b864ddf6b48c5')
+    }
 }
 
 android {
