@@ -199,6 +199,7 @@ class ConsultPickingFragment : Fragment(R.layout.fragment_consult_picking) {
             } else {
                 binding.edtNbrPicking.setText("")
                 binding.edtNbrPicking.setText(result.contents.padStart(10, '0'))
+                viewModel.getPicking(result.contents.padStart(10, '0'))
             }
         } else {
             fragment.onActivityResult(requestCode, resultCode, data)
