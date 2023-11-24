@@ -35,7 +35,7 @@
             android:layout_marginEnd="8dp"
             android:fontFamily="@font/nunito_bold"
             android:text="@string/title_nbrPicking"
-            android:textColor="@color/black"
+            style="@style/TextColor"
             android:textSize="@dimen/size_title"
             app:layout_constraintEnd_toStartOf="@+id/guideline12"
             app:layout_constraintTop_toBottomOf="@+id/include_header" />
@@ -47,7 +47,7 @@
             android:layout_marginStart="8dp"
             android:fontFamily="@font/nunito_bold"
             android:text="80287561"
-            android:textColor="@color/black"
+            style="@style/TextColor"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/textView19"
             app:layout_constraintStart_toStartOf="@+id/guideline12"
@@ -61,7 +61,7 @@
             android:layout_marginTop="8dp"
             android:fontFamily="@font/nunito_regular"
             android:text="@string/title_list_material"
-            android:textColor="@color/black"
+            style="@style/TextColor"
             android:textSize="15sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline13" />

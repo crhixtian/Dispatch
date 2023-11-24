@@ -78,7 +78,7 @@
                     android:fontFamily="@font/nunito_regular"
                     android:gravity="center"
                     android:text="@string/title_nbrPicking"
-                    android:textColor="@color/black"
+                    style="@style/TextColor"
                     android:textSize="15sp" />
 
                 <TextView
@@ -88,7 +88,7 @@
                     android:layout_marginHorizontal="10dp"
                     android:fontFamily="@font/nunito_black"
                     android:gravity="center"
-                    android:textColor="@color/black"
+                    style="@style/TextColor"
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -110,7 +110,7 @@
                     android:layout_marginLeft="30dp"
                     android:fontFamily="@font/nunito_regular"
                     android:text="@string/title_raz_social"
-                    android:textColor="@color/black"
+                    style="@style/TextColor"
                     android:textSize="15sp" />
 
                 <Space
@@ -123,7 +123,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/nunito_black"
                     android:gravity="center"
-                    android:textColor="@color/black"
+                    style="@style/TextColor"
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -145,7 +145,7 @@
                     android:fontFamily="@font/nunito_regular"
                     android:gravity="center"
                     android:text="@string/title_plate"
-                    android:textColor="@color/black"
+                    style="@style/TextColor"
                     android:textSize="15sp" />
 
                 <Space
@@ -159,7 +159,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/nunito_black"
                     android:gravity="center"
-                    android:textColor="@color/black"
+                    style="@style/TextColor"
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -181,7 +181,7 @@
                     android:fontFamily="@font/nunito_regular"
                     android:layout_marginStart="30dp"
                     android:text="@string/title_driver"
-                    android:textColor="@color/black"
+                    style="@style/TextColor"
                     android:textSize="15sp"
 
                     />
@@ -196,7 +196,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/nunito_black"
                     android:gravity="center"
-                    android:textColor="@color/black"
+                    style="@style/TextColor"
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -218,7 +218,7 @@
                     android:fontFamily="@font/nunito_regular"
                     android:gravity="center"
                     android:text="@string/title_license"
-                    android:textColor="@color/black"
+                    style="@style/TextColor"
                     android:textSize="15sp" />
 
                 <Space
@@ -232,7 +232,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/nunito_black"
                     android:gravity="center"
-                    android:textColor="@color/black"
+                    style="@style/TextColor"
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -255,7 +255,7 @@
                     android:fontFamily="@font/nunito_regular"
                     android:gravity="center"
                     android:text="@string/title_date"
-                    android:textColor="@color/black"
+                    style="@style/TextColor"
                     android:textSize="15sp" />
 
                 <Space
@@ -269,7 +269,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/nunito_black"
                     android:gravity="center"
-                    android:textColor="@color/black"
+                    style="@style/TextColor"
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -292,7 +292,7 @@
                     android:fontFamily="@font/nunito_regular"
                     android:gravity="center"
                     android:text="@string/title_hour"
-                    android:textColor="@color/black"
+                    style="@style/TextColor"
                     android:textSize="15sp" />
 
                 <Space
@@ -306,7 +306,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/nunito_black"
                     android:gravity="center"
-                    android:textColor="@color/black"
+                    style="@style/TextColor"
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -324,7 +324,7 @@
                     android:fontFamily="@font/nunito_regular"
                     android:layout_marginStart="30dp"
                     android:text="@string/title_obs"
-                    android:textColor="@color/black"
+                    style="@style/TextColor"
                     android:textSize="15sp" />
 
                 <Space
@@ -338,7 +338,7 @@
                     android:fontFamily="@font/nunito_black"
                     android:gravity="center"
                     android:ems="3"
-                    android:textColor="@color/black"
+                    style="@style/TextColor"
                     android:textSize="20sp" />
 
             </LinearLayout>

@@ -13,7 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/gray_info"
+        style="@style/Header"
         android:paddingVertical="10dp">
 
 
@@ -25,7 +25,7 @@
             android:layout_marginTop="8dp"
             android:text="@string/text_name_stevedor"
             android:textSize="15sp"
-            android:textColor="@color/black"
+            style="@style/TextColor"
             android:fontFamily="@font/nunito_regular"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -38,7 +38,7 @@
             android:layout_marginTop="16dp"
             android:text="@string/text_dni_stevedor"
             android:textSize="15sp"
-            android:textColor="@color/black"
+            style="@style/TextColor"
             android:fontFamily="@font/nunito_regular"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView22" />
@@ -50,7 +50,7 @@
             android:layout_marginStart="8dp"
             android:fontFamily="@font/nunito_bold"
             android:text="Pablito Clavito"
-            android:textColor="@color/black"
+            style="@style/TextColor"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="@+id/textView22"
             app:layout_constraintEnd_toStartOf="@+id/guideline15"
@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:text="12345678"
             android:textSize="15sp"
-            android:textColor="@color/black"
+            style="@style/TextColor"
             android:fontFamily="@font/nunito_bold"
             app:layout_constraintBottom_toBottomOf="@+id/textView23"
             app:layout_constraintStart_toStartOf="@+id/tvNameStevedor"
@@ -115,7 +115,7 @@
             android:layout_marginTop="16dp"
             android:text="@string/material_stevedor"
             android:textSize="15sp"
-            android:textColor="@color/black"
+            style="@style/TextColor"
             android:fontFamily="@font/nunito_regular"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView23" />
@@ -126,7 +126,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/nunito_bold"
             android:text="TextView"
-            android:textColor="@color/black"
+            style="@style/TextColor"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="@+id/textView6"
             app:layout_constraintStart_toStartOf="@+id/tvDocStevedor"
