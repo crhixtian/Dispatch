@@ -9,8 +9,8 @@
     <string name="btn_search_picking">Buscar</string>
     <string name="title_nbrPicking">Nro. Entrega: </string>
     <string name="title_raz_social">Razón Social: </string>
-    <string name="title_plate">Placa :</string>
-    <string name="title_driver">Conductor</string>
+    <string name="title_plate">Placa:</string>
+    <string name="title_driver">Conductor:</string>
     <string name="title_license">Licencia: </string>
     <string name="title_date">Fecha:</string>
     <string name="title_hour">Hora: </string>

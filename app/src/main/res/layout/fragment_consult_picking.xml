@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/BackgroundCarbon"
     tools:context=".Presentation.ConsultPicking.ConsultPickingFragment">
 
     <include
@@ -86,14 +87,8 @@
 
     <Button
         android:id="@+id/btnGetPicking"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:fontFamily="@font/nunito_black"
+        style="@style/StyleButton"
         android:text="@string/btn_search_picking"
-        app:cornerRadius="15dp"
-        style="@style/ButtonLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline8" />
@@ -111,9 +106,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
+        android:fontFamily="@font/nunito_regular"
         android:text="@string/Hello_login"
         android:textSize="@dimen/size_subtitle"
-        android:fontFamily="@font/nunito_regular"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/include_header" />
 
@@ -122,9 +117,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:textSize="@dimen/size_subtitle"
-        android:textColor="@color/gray"
         android:fontFamily="@font/nunito_regular"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/size_subtitle"
         app:layout_constraintStart_toStartOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
@@ -133,8 +128,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:textSize="@dimen/size_subtitle"
         android:fontFamily="@font/nunito_regular"
+        android:textSize="@dimen/size_subtitle"
         app:layout_constraintBottom_toBottomOf="@+id/textView4"
         app:layout_constraintStart_toEndOf="@+id/textView4"
         app:layout_constraintTop_toTopOf="@+id/textView4" />

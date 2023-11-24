@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipeInfo"
+    style="@style/BackgroundCarbon"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/swipeInfo"
     tools:context=".Presentation.InfoPicking.InfoPickingFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,6 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,13 +26,12 @@
             android:id="@+id/textView2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
-            android:layout_marginEnd="80dp"
-            android:fontFamily="@font/nunito_bold"
+            android:layout_marginHorizontal="50dp"
+            android:fontFamily="@font/nunito_black"
             android:gravity="center"
             android:text="@string/title_info_picking"
             android:textColor="@color/orange_principal"
-            android:textSize="@dimen/size_title"
+            android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/include_header" />
@@ -39,13 +40,10 @@
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/shape_info_picking"
-
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginVertical="5dp"
             android:orientation="vertical"
+            android:paddingHorizontal="10dp"
             app:layout_constraintBottom_toTopOf="@+id/guideline17"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -55,118 +53,58 @@
                 android:id="@+id/ly_validate"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginVertical="10dp"
                 android:layout_gravity="center"
-                android:orientation="vertical"/>
-
-            <Space
-                android:layout_width="5dp"
-                android:layout_height="5dp" />
+                android:orientation="vertical" />
 
             <LinearLayout
                 android:id="@+id/lyPicking"
-                android:layout_marginBottom="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
-                    android:fontFamily="@font/nunito_regular"
-                    android:gravity="center"
-                    android:text="@string/title_nbrPicking"
-                    style="@style/TextColor"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/tvNbrPicking"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
-                    android:fontFamily="@font/nunito_black"
-                    android:gravity="center"
-                    style="@style/TextColor"
-                    android:textSize="20sp" />
-
-            </LinearLayout>
-
-            <Space
-                android:layout_width="5dp"
-                android:layout_height="5dp" />
-
-            <LinearLayout
-                android:id="@+id/ly_raz_social"
-                android:layout_marginBottom="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
-                    android:fontFamily="@font/nunito_regular"
-                    android:text="@string/title_raz_social"
-                    style="@style/TextColor"
-                    android:textSize="15sp" />
+                    style="@style/StyleTextView15"
+                    android:text="@string/title_nbrPicking" />
 
-                <Space
-                    android:layout_width="5dp"
-                    android:layout_height="5dp" />
+                <TextView
+                    android:id="@+id/tvNbrPicking"
+                    style="@style/StyleTextView20" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ly_raz_social"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/StyleTextView15"
+                    android:text="@string/title_raz_social" />
 
                 <TextView
                     android:id="@+id/tvRazSocial"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/nunito_black"
-                    android:gravity="center"
-                    style="@style/TextColor"
-                    android:textSize="20sp" />
-
+                    style="@style/StyleTextView20" />
             </LinearLayout>
-
-            <Space
-                android:layout_width="5dp"
-                android:layout_height="5dp" />
 
             <LinearLayout
                 android:id="@+id/ly_plate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_marginVertical="10dp"
+                android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
-                    android:fontFamily="@font/nunito_regular"
-                    android:gravity="center"
-                    android:text="@string/title_plate"
-                    style="@style/TextColor"
-                    android:textSize="15sp" />
-
-                <Space
-                    android:layout_width="5dp"
-                    android:layout_height="5dp" />
+                    style="@style/StyleTextView15"
+                    android:text="@string/title_plate" />
 
                 <TextView
                     android:id="@+id/tvPlate"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/nunito_black"
-                    android:gravity="center"
-                    style="@style/TextColor"
-                    android:textSize="20sp" />
-
+                    style="@style/StyleTextView20" />
             </LinearLayout>
 
-            <Space
-                android:layout_width="5dp"
-                android:layout_height="5dp" />
 
             <LinearLayout
                 android:id="@+id/ly_driver"
@@ -176,173 +114,80 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/nunito_regular"
-                    android:layout_marginStart="30dp"
-                    android:text="@string/title_driver"
-                    style="@style/TextColor"
-                    android:textSize="15sp"
-
-                    />
-
-                <Space
-                    android:layout_width="5dp"
-                    android:layout_height="5dp" />
+                    style="@style/StyleTextView15"
+                    android:text="@string/title_driver" />
 
                 <TextView
                     android:id="@+id/tvDriver"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/nunito_black"
-                    android:gravity="center"
-                    style="@style/TextColor"
-                    android:textSize="20sp" />
-
+                    style="@style/StyleTextView20" />
             </LinearLayout>
-
-            <Space
-                android:layout_width="5dp"
-                android:layout_height="5dp" />
 
             <LinearLayout
                 android:id="@+id/ly_license"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_marginVertical="10dp"
+                android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
-                    android:fontFamily="@font/nunito_regular"
-                    android:gravity="center"
-                    android:text="@string/title_license"
-                    style="@style/TextColor"
-                    android:textSize="15sp" />
+                    style="@style/StyleTextView15"
+                    android:text="@string/title_license" />
 
-                <Space
-                    android:layout_width="5dp"
-                    android:layout_height="5dp" />
 
                 <TextView
                     android:id="@+id/tvLicense"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/nunito_black"
-                    android:gravity="center"
-                    style="@style/TextColor"
-                    android:textSize="20sp" />
-
+                    style="@style/StyleTextView20" />
             </LinearLayout>
-
-            <Space
-                android:layout_width="5dp"
-                android:layout_height="5dp" />
 
             <LinearLayout
                 android:id="@+id/lyDate"
-                android:layout_marginVertical="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_marginVertical="10dp"
+                android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
-                    android:fontFamily="@font/nunito_regular"
-                    android:gravity="center"
-                    android:text="@string/title_date"
-                    style="@style/TextColor"
-                    android:textSize="15sp" />
-
-                <Space
-                    android:layout_width="5dp"
-                    android:layout_height="5dp" />
+                    style="@style/StyleTextView15"
+                    android:text="@string/title_date" />
 
                 <TextView
                     android:id="@+id/tvDate"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/nunito_black"
-                    android:gravity="center"
-                    style="@style/TextColor"
-                    android:textSize="20sp" />
-
+                    style="@style/StyleTextView20" />
             </LinearLayout>
-
-            <Space
-                android:layout_width="5dp"
-                android:layout_height="5dp" />
 
             <LinearLayout
                 android:id="@+id/lyHour"
-                android:layout_marginVertical="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_marginVertical="10dp"
+                android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
-                    android:fontFamily="@font/nunito_regular"
-                    android:gravity="center"
-                    android:text="@string/title_hour"
-                    style="@style/TextColor"
-                    android:textSize="15sp" />
-
-                <Space
-                    android:layout_width="5dp"
-                    android:layout_height="5dp" />
+                    style="@style/StyleTextView15"
+                    android:text="@string/title_hour" />
 
                 <TextView
                     android:id="@+id/tvHour"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/nunito_black"
-                    android:gravity="center"
-                    style="@style/TextColor"
-                    android:textSize="20sp" />
-
+                    style="@style/StyleTextView20" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/lyObs"
-                android:layout_marginVertical="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/nunito_regular"
-                    android:layout_marginStart="30dp"
-                    android:text="@string/title_obs"
-                    style="@style/TextColor"
-                    android:textSize="15sp" />
-
-                <Space
-                    android:layout_width="5dp"
-                    android:layout_height="5dp" />
+                    style="@style/StyleTextView15"
+                    android:text="@string/title_obs" />
 
                 <TextView
                     android:id="@+id/tvObs"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/nunito_black"
-                    android:gravity="center"
-                    android:ems="3"
-                    style="@style/TextColor"
-                    android:textSize="20sp" />
+                    style="@style/StyleTextView20"
+                    android:ems="3" />
 
             </LinearLayout>
-
         </LinearLayout>
 
         <androidx.constraintlayout.widget.Guideline
@@ -360,7 +205,4 @@
             app:layout_constraintGuide_percent="0.98" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

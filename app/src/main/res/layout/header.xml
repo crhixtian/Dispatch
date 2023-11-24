@@ -9,7 +9,7 @@
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        style="@style/Header"
+        style="@style/BackgroundCarbon"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -21,7 +21,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_logout" />
+            app:srcCompat="@drawable/icon_logout" />
 
         <ImageView
             android:id="@+id/imgHome"
@@ -31,7 +31,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_home" />
+            app:srcCompat="@drawable/icon_home" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
