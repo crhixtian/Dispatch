@@ -46,8 +46,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/nunito_bold"
+            android:text="@string/_0080287561"
             android:textColor="@color/orange_principal"
-            android:text="0080287561"
             android:textSize="28sp"
             app:layout_constraintBottom_toBottomOf="@+id/textView19"
             app:layout_constraintStart_toStartOf="@+id/guideline12"
@@ -80,7 +80,7 @@
             android:layout_marginTop="8dp"
             android:elevation="10dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toTopOf="@+id/guideline14"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayoutButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -88,46 +88,32 @@
             app:layout_constraintVertical_bias="0.0"
             tools:listitem="@layout/item_material" />
 
-        <Button
-            android:id="@+id/btnValidate"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="16dp"
-            android:fontFamily="@font/nunito_black"
-            android:text="@string/text_btn_validar"
-            android:textSize="15sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/guideline12"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
-            android:id="@+id/btnObserve"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="16dp"
-            android:fontFamily="@font/nunito_black"
-            android:text="@string/text_btn_note"
-            android:textSize="15sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline12" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline14"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/linearLayoutButton"
+            style="@style/BackgroundCarbon"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.9" />
+            android:weightSum="2"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <Button
+                android:id="@+id/btnValidate"
+                style="@style/StyleButtonHorizontal"
+                android:text="@string/text_btn_validar"
+                tools:ignore="TextContrastCheck,VisualLintButtonSize" />
+
+            <Button
+                android:id="@+id/btnObserve"
+                style="@style/StyleButtonHorizontal"
+                android:text="@string/text_btn_note"
+                tools:ignore="TextContrastCheck,VisualLintButtonSize" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/btnPdf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="pdf"
+            android:text="@string/pdf"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/rcvMaterials"
             app:layout_constraintEnd_toEndOf="parent"

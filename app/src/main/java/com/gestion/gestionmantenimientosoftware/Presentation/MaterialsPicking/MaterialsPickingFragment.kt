@@ -107,6 +107,7 @@ class MaterialsPickingFragment : Fragment(R.layout.fragment_materials_picking) {
         when (SessionManager().getRolId()) {
             //Despachador responsable - Supervisor solo consulta
             6, 7 -> {
+                binding.linearLayoutButton.visibility = View.GONE
                 binding.btnValidate.visibility = View.GONE
                 binding.btnObserve.visibility = View.GONE
             }
@@ -130,6 +131,7 @@ class MaterialsPickingFragment : Fragment(R.layout.fragment_materials_picking) {
 
     private fun status() = with(binding) {
         if (SessionManager().getStatus() == 1) {
+            linearLayoutButton.visibility = View.GONE
             btnValidate.visibility = View.GONE
             btnObserve.visibility = View.GONE
             btnPdf.visibility = View.GONE
