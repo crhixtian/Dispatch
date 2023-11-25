@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipeMaterials"
+    style="@style/BackgroundCarbon"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/swipeMaterials"
     tools:context=".Presentation.MaterialsPicking.MaterialsPickingFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,7 +21,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline12"
             android:layout_width="wrap_content"
@@ -30,39 +30,39 @@
 
         <TextView
             android:id="@+id/textView19"
+            style="@style/TextColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:fontFamily="@font/nunito_bold"
             android:text="@string/title_nbrPicking"
-            style="@style/TextColor"
-            android:textSize="@dimen/size_title"
+            android:textSize="28sp"
             app:layout_constraintEnd_toStartOf="@+id/guideline12"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/include_header" />
 
         <TextView
             android:id="@+id/tvPicking"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:fontFamily="@font/nunito_bold"
-            android:text="80287561"
-            style="@style/TextColor"
-            android:textSize="20sp"
+            android:textColor="@color/orange_principal"
+            android:text="0080287561"
+            android:textSize="28sp"
             app:layout_constraintBottom_toBottomOf="@+id/textView19"
             app:layout_constraintStart_toStartOf="@+id/guideline12"
             app:layout_constraintTop_toTopOf="@+id/textView19" />
 
         <TextView
             android:id="@+id/textView21"
+            style="@style/TextColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/nunito_regular"
             android:text="@string/title_list_material"
-            style="@style/TextColor"
-            android:textSize="15sp"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline13" />
 
@@ -78,6 +78,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="8dp"
+            android:elevation="10dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toTopOf="@+id/guideline14"
             app:layout_constraintEnd_toEndOf="parent"
@@ -123,17 +124,13 @@
             app:layout_constraintGuide_percent="0.9" />
 
         <Button
-            android:visibility="gone"
             android:id="@+id/btnPdf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="pdf"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/rcvMaterials"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

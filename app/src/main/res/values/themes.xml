@@ -69,4 +69,20 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center</item>
     </style>
+
+    <style name="StyleHorizontalLine">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">3dp</item>
+        <item name="android:background">@color/gray_info</item>
+    </style>
+
+    <style name="StyleCardView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginHorizontal">10dp</item>
+        <item name="android:layout_marginVertical">5dp</item>
+        <item name="android:backgroundTint">@color/gray_info</item>
+        <item name="android:background">@color/gray_info</item>
+        <item name="cardCornerRadius">10dp</item>
+    </style>
 </resources>

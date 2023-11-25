@@ -144,7 +144,10 @@ class InfoPickingFragment : Fragment(R.layout.fragment_info_picking) {
             tvLicense.text = it.license
             tvDate.text = it.date_deliv
             tvHour.text = it.Hour
-            tvObs.text = it.observation
+            if(it.observation.toString().isNotEmpty()){
+                tvObs.text = it.observation
+            }
+
         }
     }
 }

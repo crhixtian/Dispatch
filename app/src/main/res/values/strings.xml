@@ -65,7 +65,8 @@
     <string name="btnCancelarApi">Cancelar</string>
     <string name="title_obs">Observación:</string>
     <string name="Hello_login">Hola,</string>
-    <string name="Title_perfil">Perfil</string>
-    <string name="Title_userName">Nombre de usuario</string>
+    <string name="Title_perfil">Perfil:</string>
+    <string name="Title_userName">Nombre de usuario:</string>
     <string name="title_profile">Perfil</string>
+    <string name="middle_dash">-</string>
 </resources>
