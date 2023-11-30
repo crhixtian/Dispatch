@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingHorizontal="10dp">
@@ -21,6 +20,7 @@
 
     <Button
         android:id="@+id/btnAceptarApi"
+        style="@style/StyleButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -31,6 +31,7 @@
 
     <Button
         android:id="@+id/btnCancelarApi"
+        style="@style/StyleButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -55,8 +56,8 @@
         android:layout_marginEnd="32dp"
         android:background="@drawable/shape_boxes"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="Introduzca URL"
+        android:inputType="textPersonName"
         android:paddingVertical="15dp"
         android:paddingLeft="10dp"
         android:textSize="15sp"

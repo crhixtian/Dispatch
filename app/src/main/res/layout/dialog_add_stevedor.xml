@@ -47,9 +47,6 @@
                 android:fontFamily="@font/nunito_bold" />
         </LinearLayout>
 
-        <Space
-            android:layout_width="1dp"
-            android:layout_height="10dp"/>
 
         <EditText
             android:id="@+id/edt_dialogName"
