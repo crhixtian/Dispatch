@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipeInfo"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.infoPicking.InfoPickingFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <include
+            android:id="@+id/include_header"
+            layout="@layout/header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView2"
+            style="@style/StyleTextViewBlack"
+            android:layout_marginHorizontal="50dp"
+            android:gravity="center"
+            android:text="@string/title_info_picking"
+            android:textColor="@color/orange_principal"
+            android:textSize="@dimen/size_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_header"
+            tools:ignore="TextContrastCheck" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginVertical="5dp"
+            android:orientation="vertical"
+            android:paddingHorizontal="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2">
+
+            <LinearLayout
+                android:id="@+id/ly_validate"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:orientation="vertical" />
+
+            <LinearLayout
+                android:id="@+id/lyPicking"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="7.5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/StyleTextView"
+                    android:text="@string/title_nbrPicking"
+                    android:textSize="@dimen/size_text" />
+
+                <TextView
+                    android:id="@+id/tvNbrPicking"
+                    style="@style/StyleTextViewBlack"
+                    android:text="@string/api"
+                    android:textSize="@dimen/size_subtitle" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ly_raz_social"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="7.5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/StyleTextView"
+                    android:text="@string/title_raz_social"
+                    android:textSize="@dimen/size_text" />
+
+                <TextView
+                    android:id="@+id/tvRazSocial"
+                    style="@style/StyleTextViewBlack"
+                    android:text="@string/api"
+                    android:textSize="@dimen/size_subtitle" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ly_plate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="7.5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/StyleTextView"
+                    android:text="@string/title_plate"
+                    android:textSize="@dimen/size_text" />
+
+                <TextView
+                    android:id="@+id/tvPlate"
+                    style="@style/StyleTextViewBlack"
+                    android:text="@string/api"
+                    android:textSize="@dimen/size_subtitle" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ly_driver"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="7.5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/StyleTextView"
+                    android:text="@string/title_driver"
+                    android:textSize="@dimen/size_text" />
+
+                <TextView
+                    android:id="@+id/tvDriver"
+                    style="@style/StyleTextViewBlack"
+                    android:text="@string/api"
+                    android:textSize="@dimen/size_subtitle" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ly_license"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="7.5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/StyleTextView"
+                    android:text="@string/title_license"
+                    android:textSize="@dimen/size_text" />
+
+                <TextView
+                    android:id="@+id/tvLicense"
+                    style="@style/StyleTextViewBlack"
+                    android:text="@string/api"
+                    android:textSize="@dimen/size_subtitle" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lyDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="7.5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/StyleTextView"
+                    android:text="@string/title_date"
+                    android:textSize="@dimen/size_text" />
+
+                <TextView
+                    android:id="@+id/tvDate"
+                    style="@style/StyleTextViewBlack"
+                    android:text="@string/api"
+                    android:textSize="@dimen/size_subtitle" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lyHour"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="7.5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/StyleTextView"
+                    android:text="@string/title_hour"
+                    android:textSize="@dimen/size_text" />
+
+                <TextView
+                    android:id="@+id/tvHour"
+                    style="@style/StyleTextViewBlack"
+                    android:text="@string/api"
+                    android:textSize="@dimen/size_subtitle" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lyObs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="7.5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/StyleTextView"
+                    android:text="@string/title_obs"
+                    android:textSize="@dimen/size_text" />
+
+                <TextView
+                    android:id="@+id/tvObs"
+                    style="@style/StyleTextViewBlack"
+                    android:ems="3"
+                    android:text="@string/middle_dash"
+                    android:textSize="@dimen/size_subtitle" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

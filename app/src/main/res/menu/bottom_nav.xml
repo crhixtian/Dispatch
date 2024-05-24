@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/infoPickingFragment"
+        android:icon="@drawable/ic_info_picking"
+        android:title="" />
+    <item
+        android:id="@+id/materialsPickingFragment"
+        android:icon="@drawable/ic_list_materials"
+        android:title="" />
+    <item
+        android:id="@+id/stevedoresFragment"
+        android:icon="@drawable/ic_stevedores"
+        android:title="" />
+    <item
+        android:id="@+id/InfoUserFragment"
+        android:icon="@drawable/ic_user"
+        android:title="" />
+</menu>

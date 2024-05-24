@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.infoUser.InfoUserFragment">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline09"
+        style="@style/StyleGuidelineHorizontal"
+        app:layout_constraintGuide_percent="0.10" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineV10"
+        style="@style/StyleGuidelineHorizontal"
+        app:layout_constraintGuide_percent="0.90" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline11"
+        style="@style/StyleGuidelineVertical"
+        app:layout_constraintGuide_percent="0.10" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline12"
+        style="@style/StyleGuidelineVertical"
+        app:layout_constraintGuide_percent="0.90" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:elevation="10dp"
+        app:cardCornerRadius="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineV10"
+        app:layout_constraintEnd_toStartOf="@+id/guideline12"
+        app:layout_constraintStart_toStartOf="@+id/guideline11"
+        app:layout_constraintTop_toTopOf="@+id/guideline09">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="20dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:shapeAppearanceOverlay="@style/ImageProfileRound"
+                    app:srcCompat="@drawable/image_profile" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/tvFullName"
+                style="@style/StyleTextViewBlack"
+                android:layout_marginBottom="50dp"
+                android:text="@string/api"
+                android:textSize="@dimen/size_title" />
+
+            <TextView
+                style="@style/StyleTextView"
+                android:text="@string/Title_perfil"
+                android:textSize="@dimen/size_text" />
+
+            <TextView
+                android:id="@+id/TvRolName"
+                style="@style/StyleTextViewBlack"
+                android:layout_marginBottom="20dp"
+                android:text="@string/api"
+                android:textSize="@dimen/size_subtitle" />
+
+            <TextView
+                style="@style/StyleTextView"
+                android:text="@string/Title_userName"
+                android:textSize="@dimen/size_text" />
+
+            <TextView
+                android:id="@+id/tvUserName"
+                style="@style/StyleTextViewBlack"
+                android:text="@string/api"
+                android:textSize="@dimen/size_subtitle" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

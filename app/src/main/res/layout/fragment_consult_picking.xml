@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.consultPicking.ConsultPickingFragment">
+
+    <include
+        android:id="@+id/include_header"
+        layout="@layout/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/nunito"
+        android:text="@string/Hello_login"
+        android:textSize="@dimen/size_subtitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include_header" />
+
+    <TextView
+        android:id="@+id/tvRol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/nunito"
+        android:text="@string/api"
+        android:textSize="@dimen/size_subtitle"
+        app:layout_constraintStart_toStartOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/tvNameUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:fontFamily="@font/nunito"
+        android:text="@string/api"
+        android:textSize="@dimen/size_subtitle"
+        app:layout_constraintBottom_toBottomOf="@+id/textView4"
+        app:layout_constraintStart_toEndOf="@+id/textView4"
+        app:layout_constraintTop_toTopOf="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/textView"
+        style="@style/StyleTextViewBlack"
+        android:layout_width="0dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/title_searchPicking"
+        android:textColor="@color/orange_principal"
+        android:textSize="@dimen/size_title"
+        app:layout_constraintEnd_toEndOf="@id/guidelineCPV95"
+        app:layout_constraintStart_toStartOf="@id/guidelineCPV5"
+        app:layout_constraintTop_toBottomOf="@+id/tvRol" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/shape_rectangle"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingHorizontal="5dp"
+        android:paddingVertical="10dp"
+        app:layout_constraintEnd_toEndOf="@id/guidelineCPV95"
+        app:layout_constraintStart_toStartOf="@id/guidelineCPV5"
+        app:layout_constraintTop_toTopOf="@+id/guidelineCPH30">
+
+        <EditText
+            android:id="@+id/edtNbrPicking"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:autofillHints=""
+            android:background="@color/transparent"
+            android:fontFamily="@font/nunito_bold"
+            android:hint="@string/hint_nbrPicking"
+            android:inputType="number"
+            android:maxLength="10"
+            android:textAlignment="center"
+            android:textColorHint="@color/soft_gray"
+            app:counterEnabled="true" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imgScan"
+            android:layout_width="400dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="6"
+            android:src="@drawable/barcode"
+            app:layout_constraintBottom_toBottomOf="@+id/edt_nbrPicking"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/edt_nbrPicking" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnGetPicking"
+        style="@style/StyleButton"
+        android:layout_width="0dp"
+        android:text="@string/btn_search_picking"
+        android:textSize="@dimen/size_subtitle"
+        app:layout_constraintEnd_toEndOf="@id/guidelineCPV95"
+        app:layout_constraintStart_toStartOf="@id/guidelineCPV5"
+        app:layout_constraintTop_toTopOf="@+id/guidelineCPH50" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineCPH30"
+        style="@style/StyleGuidelineHorizontal"
+        app:layout_constraintGuide_percent="0.3" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineCPV5"
+        style="@style/StyleGuidelineVertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineCPV95"
+        style="@style/StyleGuidelineVertical"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineCPH50"
+        style="@style/StyleGuidelineHorizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

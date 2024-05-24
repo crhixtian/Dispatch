@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/loginFragment">
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.android.dispatch.presentation.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_consultPickingFragment"
+            app:destination="@id/consultPickingFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/consultPickingFragment"
+        android:name="com.android.dispatch.presentation.consultPicking.ConsultPickingFragment"
+        android:label="fragment_consult_picking"
+        tools:layout="@layout/fragment_consult_picking">
+        <action
+            android:id="@+id/action_consultPickingFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <argument
+            android:name="obj_user"
+            app:argType="com.android.dispatch.model.User" />
+    </fragment>
+</navigation>
