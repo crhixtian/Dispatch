@@ -1,60 +1,218 @@
 package com.android.dispatch.presentation.stevedores
 
+import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
+import androidx.fragment.app.viewModels
+import com.android.dispatch.MainActivity
+import com.android.dispatch.utils.BaseAdapter
+import com.android.dispatch.model.ClsStevedores
 import com.android.dispatch.R
+import com.android.dispatch.databinding.DialogLogoutBinding
+import com.android.dispatch.databinding.FragmentStevedoresBinding
+import com.android.dispatch.databinding.ItemStevedorBinding
+import com.android.dispatch.databinding.DialogDeleteBinding
+import com.android.dispatch.databinding.DialogEditBinding
+import com.android.dispatch.utils.Constants
+import com.android.dispatch.utils.DialogManager
+import com.android.dispatch.utils.SessionManager
+import com.android.dispatch.utils.Toast.Toast
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class StevedoresFragment : Fragment(R.layout.fragment_stevedores) {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [StevedoresFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class StevedoresFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var binding: FragmentStevedoresBinding
+    private lateinit var globalView: View
+    private val viewModel: StevedoresViewModel by viewModels()
+    private lateinit var id: String
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    private val adapter: BaseAdapter<ClsStevedores> =
+        object : BaseAdapter<ClsStevedores>(emptyList()) {
+            override fun getViewHolder(parent: ViewGroup): BaseViewHolder<ClsStevedores> {
+                val view = LayoutInflater.from(parent.context)
+                    .inflate(R.layout.item_stevedor, parent, false)
+                return object : BaseViewHolder<ClsStevedores>(view) {
+                    private val binding: ItemStevedorBinding = ItemStevedorBinding.bind(view)
+                    override fun bind(entity: ClsStevedores) = with(binding) {
+                        tvNameStevedor.text = entity.nombre
+                        tvDocStevedor.text = entity.dni
+                        tvMaterialStevedor.text = entity.material
+
+                        when (SessionManager().getRolId()) {
+                            //Verificador torre de control
+                            4, 7 -> {
+                                lyDelete.visibility = View.GONE
+                                lyEdit.visibility = View.GONE
+                            }
+                        }
+                        lyEdit.setOnClickListener {
+                            editStevedor(entity).show()
+                        }
+                        lyDelete.setOnClickListener {
+                            sureDelete(entity).show()
+                        }
+
+                        if (SessionManager().getStatus() == 1) {
+                            lyDelete.visibility = View.GONE
+                            lyEdit.visibility = View.GONE
+                        }
+                    }
+                }
+            }
+
+        }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding = FragmentStevedoresBinding.bind(view)
+        globalView = view
+
+        setupAdapter()
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        if (arguments != null) {
+            id = requireArguments().getString(Constants.PICKING_FRAGMENT).toString()
+            binding.txtNbrPicking.text = id
+
+            loadData()
+            observers()
+            events()
+
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_stevedores, container, false)
+    private fun events() = with(binding) {
+        includeHeader.imgHome.setOnClickListener {
+            logOut(Constants.HOME).show()
+        }
+        includeHeader.btnLogout.setOnClickListener {
+            logOut(Constants.LOG_OUT).show()
+        }
+        swipeStevedores.setOnRefreshListener {
+            viewModel.loadData(id)
+            swipeStevedores.isRefreshing = false
+        }
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                logOut(Constants.HOME).show()
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(callback)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment StevedoresFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            StevedoresFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private fun logOut(origin: String): AlertDialog {
+        val bindingAlert = DialogLogoutBinding.inflate(LayoutInflater.from(context))
+        val builder = AlertDialog.Builder(context)
+        builder.setView(bindingAlert.root)
+        val alertDialog = builder.create()
+
+        when (origin) {
+            Constants.LOG_OUT -> {
+                bindingAlert.btnSiLogOut.setOnClickListener {
+                    SessionManager().saveStatuSession(status = false)
+                    requireActivity().startActivity(
+                        Intent(
+                            requireActivity(),
+                            MainActivity::class.java
+                        )
+                    )
+                    alertDialog.dismiss()
                 }
             }
+
+            Constants.HOME -> {
+                bindingAlert.tvTitleDialog.text = "¿Desea salir del picking?"
+                bindingAlert.btnSiLogOut.setOnClickListener {
+                    requireActivity().startActivity(
+                        Intent(
+                            requireActivity(),
+                            MainActivity::class.java
+                        )
+                    )
+                    alertDialog.dismiss()
+                }
+            }
+        }
+        bindingAlert.btnNoLogout.setOnClickListener {
+            alertDialog.dismiss()
+        }
+        return alertDialog
+    }
+
+    private fun loadData() {
+        //viewModel.getStevedores(id)
+    }
+
+    private fun observers() {
+        viewModel.error.observe(viewLifecycleOwner) { e ->
+            context?.Toast(e)
+        }
+        viewModel.loader.observe(viewLifecycleOwner) { l ->
+            if (l) DialogManager.showProgress(requireContext())
+            else DialogManager.hideProgress()
+        }
+        viewModel.message.observe(viewLifecycleOwner) {
+            context?.Toast(it)
+        }
+        /*viewModel.stevedores.observe(viewLifecycleOwner){
+            it.observe(viewLifecycleOwner){ list ->
+                adapter.updateList(list)
+            }
+        }*/
+        viewModel.stevedores?.observe(viewLifecycleOwner) {
+            adapter.updateList(it)
+        }
+    }
+
+    private fun setupAdapter() = with(binding) {
+        rcvStevedores.adapter = adapter
+    }
+
+    private fun sureDelete(entity: ClsStevedores): AlertDialog {
+        val bindingAlert = DialogDeleteBinding.inflate(LayoutInflater.from(requireContext()))
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setView(bindingAlert.root)
+        val alertDialog = builder.create()
+
+        bindingAlert.tvNameStevedor.text = entity.nombre
+
+        bindingAlert.btnAgree.setOnClickListener {
+            viewModel.delete(entity)
+            alertDialog.dismiss()
+        }
+        bindingAlert.btnCancel.setOnClickListener {
+            alertDialog.dismiss()
+        }
+
+        return alertDialog
+    }
+
+    private fun editStevedor(entity: ClsStevedores): AlertDialog {
+        val bindingAlert = DialogEditBinding.inflate(LayoutInflater.from(requireContext()))
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setView(bindingAlert.root)
+        val alertDialog = builder.create()
+
+        bindingAlert.edtName.setText(entity.nombre)
+        bindingAlert.edtDni.setText(entity.dni)
+
+        bindingAlert.btnUpdate.setOnClickListener {
+            entity.nombre = bindingAlert.edtName.text.toString()
+            entity.dni = bindingAlert.edtDni.text.toString()
+            viewModel.edit(entity)
+
+            alertDialog.dismiss()
+        }
+
+        return alertDialog
     }
 }
