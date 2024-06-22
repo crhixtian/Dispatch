@@ -3,13 +3,11 @@ package com.android.dispatch.presentation.materialsPicking
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.android.dispatch.MainActivity
@@ -73,7 +71,6 @@ class MaterialsPickingFragment : Fragment(R.layout.fragment_materials_picking) {
                         }
 
                         when (SessionManager().getRolId()) {
-                            //Verificador torre de control - Supervisor solo consulta
                             4, 7 -> {
                                 btnAddStvedor.visibility = View.GONE
                                 btnObservation.visibility = View.GONE
@@ -102,15 +99,10 @@ class MaterialsPickingFragment : Fragment(R.layout.fragment_materials_picking) {
 
         setupView()
         setupAdapter()
-        //binding.btnPdf.visibility = View.VISIBLE
-        //binding.btnPdf.setOnClickListener {
-        //    sendMail()
-        //}
     }
 
     private fun setupView() {
         when (SessionManager().getRolId()) {
-            //Despachador responsable - Supervisor solo consulta
             6, 7 -> {
                 binding.linearLayoutButton.visibility = View.GONE
                 binding.btnValidate.visibility = View.GONE
@@ -119,7 +111,6 @@ class MaterialsPickingFragment : Fragment(R.layout.fragment_materials_picking) {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     @Deprecated("Deprecated in Java")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -161,11 +152,8 @@ class MaterialsPickingFragment : Fragment(R.layout.fragment_materials_picking) {
             endLoad(entity = pickingDet).show()
         }
         viewModel.pdf.observe(viewLifecycleOwner) {
-            //if(it) sendMail()
         }
-        /*viewModel.response.observe(viewLifecycleOwner) { response ->
-            if (response) sendMail()
-        }*/
+
         viewModel.success.observe(viewLifecycleOwner) { picking ->
             getSuccess(picking.nbrpicking)
         }
@@ -176,11 +164,6 @@ class MaterialsPickingFragment : Fragment(R.layout.fragment_materials_picking) {
             if (it) getObserve()
         }
     }
-
-    /*@SuppressLint("UseCompatLoadingForDrawables")
-    private fun sendMail() {
-        viewModel.sendMail(id, requireContext())
-    }*/
 
     private fun getSuccess(picking: String) {
         val bundle = Bundle().apply {
@@ -201,7 +184,6 @@ class MaterialsPickingFragment : Fragment(R.layout.fragment_materials_picking) {
         }
         binding.btnObserve.setOnClickListener {
             logOut(origin = Constants.OBSERVE, null).show()
-            //observePicking(id = id).show()
         }
         binding.includeHeader.imgHome.setOnClickListener {
             logOut(origin = Constants.HOME, null).show()
@@ -221,7 +203,7 @@ class MaterialsPickingFragment : Fragment(R.layout.fragment_materials_picking) {
         requireActivity().onBackPressedDispatcher.addCallback(callback)
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
+    @SuppressLint("SetTextI18n")
     private fun logOut(origin: String, material: ClsPickingDetail?): AlertDialog {
         val bindingAlert = DialogLogoutBinding.inflate(LayoutInflater.from(context))
         val builder = AlertDialog.Builder(context)
@@ -303,7 +285,6 @@ class MaterialsPickingFragment : Fragment(R.layout.fragment_materials_picking) {
         viewModel.checkStevedores(entity)
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun observePicking(id: String): AlertDialog {
         val bindingAlert = DialogObservationBinding.inflate(LayoutInflater.from(requireContext()))
         val builder = AlertDialog.Builder(requireContext())

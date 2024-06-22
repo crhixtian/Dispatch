@@ -2,6 +2,16 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id("androidx.navigation.safeargs.kotlin")
+    id("org.sonarqube") version "5.0.0.4638"
+}
+
+sonar {
+    properties {
+        property("sonar.projectKey", "Dispatch")
+        property("sonar.projectName", "Dispatch")
+        property("sonar.host.url", "http://localhost:9000")
+        property("sonar.token", "sqp_11c201d9402944047495cc86bbd6a4af66665535")
+    }
 }
 
 android {

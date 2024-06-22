@@ -53,8 +53,6 @@ class MaterialPickingViewModel : ViewModel() {
     val pickingDet = PickingRepositoryImp.Picking.getPickingDB
 
     var pickingRepository: PickingRepository = PickingRepositoryImp()
-    //var pdfRepository: PdfRepository = PdfRepositoryImp()
-    //var mailRepository: MailRepository = MailRepositoryImp()
 
     fun addStevedor(nombre: String, dni: String, entity: ClsPickingDetail) {
         viewModelScope.launch(Dispatchers.Main) {
@@ -80,6 +78,7 @@ class MaterialPickingViewModel : ViewModel() {
                             }
                         }
                     }
+
                     is OperationResult.Failure -> _error.value =
                         response.exception?.message.toString()
                 }
@@ -112,6 +111,7 @@ class MaterialPickingViewModel : ViewModel() {
                             }
                         }
                     }
+
                     is OperationResult.Failure -> _error.value =
                         response.exception?.message.toString()
                 }
@@ -144,6 +144,7 @@ class MaterialPickingViewModel : ViewModel() {
                             }
                         }
                     }
+
                     is OperationResult.Failure -> _error.value =
                         response.exception?.message.toString()
                 }
@@ -159,7 +160,6 @@ class MaterialPickingViewModel : ViewModel() {
     fun checkStevedores(entity: ClsPickingDetail) {
         viewModelScope.launch(Dispatchers.Main) {
             try {
-                //_loader.value = true
                 val response = withContext(Dispatchers.IO) {
                     pickingRepository.checkStevedores(entity)
                 }
@@ -172,9 +172,7 @@ class MaterialPickingViewModel : ViewModel() {
 
             } catch (e: Exception) {
                 _error.value = e.message
-            } //finally {
-            //_loader.value = false
-            //}
+            }
         }
     }
 
@@ -196,11 +194,13 @@ class MaterialPickingViewModel : ViewModel() {
                                     _message.value = responseDb.data
                                     _getObserve.value = true
                                 }
+
                                 is OperationResult.Failure -> _error.value =
                                     responseDb.exception?.message.toString()
                             }
                         }
                     }
+
                     is OperationResult.Failure -> _error.value =
                         response.exception?.message.toString()
                 }
@@ -238,11 +238,13 @@ class MaterialPickingViewModel : ViewModel() {
                                         SessionManager().saveDateVerify(getDate())
                                         SessionManager().saveHourVerify(getHour())
                                     }
+
                                 is OperationResult.Failure -> _error.value =
                                     responseVerified.exception?.message.toString()
                             }
                         }
                     }
+
                     is OperationResult.Failure -> _error.value =
                         response.exception?.message.toString()
                 }
@@ -254,50 +256,6 @@ class MaterialPickingViewModel : ViewModel() {
             }
         }
     }
-
-    /*fun sendMail(id: String, context: Context) {
-        viewModelScope.launch(Dispatchers.Main) {
-            try {
-                _loader.value = true
-                val response = withContext(Dispatchers.IO) {
-                    pickingRepository.getPicking(id)
-                }
-
-                when (response) {
-                    is OperationResult.Complete -> {
-                        var resp = true
-                        response.data?.let {
-                            withContext(Dispatchers.IO) {
-                                val respuesta = MailRepository().getMails()
-                                if (respuesta == 1) {
-                                    MailRepository().execute(it, context)
-                                        .onErrorComplete {
-                                            resp = false
-                                            Log.e("ASCT", it.message ?: it.toString())
-                                            true
-                                        }.subscribeOn(Schedulers.io())
-                                        .subscribe()
-                                } else {
-                                    resp = false
-                                }
-                            }
-                            if (resp) _success.value = response.data.Data
-                            else _message.value = "Error al recibir correos"
-                        }
-                    }
-                    is OperationResult.Failure -> {
-                        _error.value = response.exception?.message.toString()
-                        _response.value = false
-                    }
-                }
-
-            } catch (e: Exception) {
-                _error.value = e.message
-            } finally {
-                _loader.value = false
-            }
-        }
-    }*/
 
     fun observeMaterial(material: ClsPickingDetail?, motivo: String) {
         viewModelScope.launch(Dispatchers.Main) {
@@ -314,15 +272,17 @@ class MaterialPickingViewModel : ViewModel() {
                                 pickingRepository.observeMaterial(material, motivo)
                             }) {
                                 is OperationResult.Complete -> {
-                                    if (responseDb.data == 1){
+                                    if (responseDb.data == 1) {
                                         _message.value = "Material observado correctamente"
                                     }
                                 }
+
                                 is OperationResult.Failure -> _error.value =
                                     responseDb.exception?.message.toString()
                             }
                         }
                     }
+
                     is OperationResult.Failure -> _error.value = response.toString()
                 }
 
@@ -361,6 +321,7 @@ class MaterialPickingViewModel : ViewModel() {
                             _error.value = response.data?.Description
                         }
                     }
+
                     is OperationResult.Failure -> {
                         _error.value = response.exception?.message.toString()
                     }

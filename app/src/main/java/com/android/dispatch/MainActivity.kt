@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.android.dispatch
 
 import android.Manifest
@@ -15,15 +17,16 @@ import com.android.dispatch.utils.DialogManager
 import com.android.dispatch.utils.Toast.Toast
 import java.util.concurrent.TimeUnit
 
+@Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
-    lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         if (checkPermission()){
-            //this.Toast("Permiso aceptado")
+            this.Toast("Permission accept")
         }else{
             requestPermissions()
         }
@@ -61,15 +64,6 @@ class MainActivity : AppCompatActivity() {
         return networkInfo != null && networkInfo.isConnected
     }
 
-    private fun disconnectionDialog(): AlertDialog {
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle("SIN CONEXIÓN A INTERNET")
-        builder.setMessage("Verifique su conexión a internet")
-        builder.setCancelable(false)
-
-        return builder.create()
-    }
-
     private fun checkPermission(): Boolean{
         val permission1 = ContextCompat.checkSelfPermission(applicationContext,
             Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -83,7 +77,7 @@ class MainActivity : AppCompatActivity() {
     private fun requestPermissions(){
         ActivityCompat.requestPermissions(
             this,
-            arrayOf<String>(
+            arrayOf(
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.READ_EXTERNAL_STORAGE
             ),
@@ -104,11 +98,9 @@ class MainActivity : AppCompatActivity() {
                 val readStorage = grantResults[1] == PackageManager.PERMISSION_GRANTED
 
                 if(writeStorage && readStorage){
-                    this.Toast("Permiso concedido")
+                    this.Toast("Permission granted")
                 }else{
-                    //this.Toast("Permiso denegado")
-                    //requestPermissions()
-                    //finish()
+                    this.Toast("Permission denied")
                 }
             }
         }
