@@ -1,4 +1,4 @@
-package com.gestion.gestionmantenimientosoftware.Repository.Pdf
+package com.gestion.despacho.repository.pdf
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -12,11 +12,11 @@ import android.os.Build
 import android.os.Environment
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
-import com.gestion.gestionmantenimientosoftware.Model.PickingDto
-import com.gestion.gestionmantenimientosoftware.R
-import com.gestion.gestionmantenimientosoftware.Utils.Constants
-import com.gestion.gestionmantenimientosoftware.Utils.Format.format
-import com.gestion.gestionmantenimientosoftware.Utils.SessionManager
+import com.gestion.despacho.model.PickingDto
+import com.gestion.despacho.R
+import com.gestion.despacho.utils.Constants
+import com.gestion.despacho.utils.Format.format
+import com.gestion.despacho.utils.SessionManager
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.FileOutputStream

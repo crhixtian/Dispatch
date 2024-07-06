@@ -1,11 +1,11 @@
-package com.gestion.gestionmantenimientosoftware.Data.Daos
+package com.gestion.despacho.data.daos
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.gestion.gestionmantenimientosoftware.Model.ClsPicking
+import com.gestion.despacho.model.ClsPicking
 
 @Dao
 interface PickingDao {

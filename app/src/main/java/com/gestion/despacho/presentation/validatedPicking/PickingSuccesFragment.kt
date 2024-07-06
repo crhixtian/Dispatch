@@ -1,21 +1,21 @@
-package com.gestion.gestionmantenimientosoftware.Presentation.ValidatedPicking
+package com.gestion.despacho.presentation.validatedPicking
 
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.activity.OnBackPressedCallback
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.gestion.gestionmantenimientosoftware.MainActivity
-import com.gestion.gestionmantenimientosoftware.R
-import com.gestion.gestionmantenimientosoftware.Utils.Constants
-import com.gestion.gestionmantenimientosoftware.Utils.SessionManager
-import com.gestion.gestionmantenimientosoftware.databinding.FragmentPickingSuccesBinding
+import com.gestion.despacho.MainActivity
+import com.gestion.despacho.R
+import com.gestion.despacho.databinding.FragmentPickingSuccesBinding
+import com.gestion.despacho.utils.Constants
+import com.gestion.despacho.utils.SessionManager
 
 class PickingSuccesFragment : Fragment(R.layout.fragment_picking_succes) {
 
-    lateinit var binding: FragmentPickingSuccesBinding
+    private lateinit var binding: FragmentPickingSuccesBinding
     private val viewmodel: PickingSuccesViewModel by viewModels()
     lateinit var picking: String
 
@@ -39,7 +39,7 @@ class PickingSuccesFragment : Fragment(R.layout.fragment_picking_succes) {
                 }
             } else {
                 it.pickingDet.forEach { pickingDet ->
-                    controller += " | "+ pickingDet.dispatcher
+                    controller += getString(R.string.barra)+ pickingDet.dispatcher
                 }
             }
 

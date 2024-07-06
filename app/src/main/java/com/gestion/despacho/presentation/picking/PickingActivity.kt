@@ -1,27 +1,29 @@
-package com.gestion.gestionmantenimientosoftware.Presentation.Picking
+package com.gestion.despacho.presentation.picking
 
 import android.content.Context
 import android.net.ConnectivityManager
-import android.net.NetworkInfo
-import androidx.appcompat.app.AppCompatActivity
+import android.net.NetworkCapabilities
+import android.os.Build
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.gestion.gestionmantenimientosoftware.Model.User
-import com.gestion.gestionmantenimientosoftware.Presentation.InfoPicking.InfoPickingFragment
-import com.gestion.gestionmantenimientosoftware.Presentation.InfoUser.InfoUserFragment
-import com.gestion.gestionmantenimientosoftware.Presentation.MaterialsPicking.MaterialsPickingFragment
-import com.gestion.gestionmantenimientosoftware.Presentation.Stevedores.StevedoresFragment
-import com.gestion.gestionmantenimientosoftware.R
-import com.gestion.gestionmantenimientosoftware.Utils.Constants
-import com.gestion.gestionmantenimientosoftware.Utils.DialogManager
-import com.gestion.gestionmantenimientosoftware.databinding.ActivityPickingBinding
+import com.gestion.despacho.R
+import com.gestion.despacho.databinding.ActivityPickingBinding
+import com.gestion.despacho.model.User
+import com.gestion.despacho.presentation.infoPicking.InfoPickingFragment
+import com.gestion.despacho.presentation.infoUser.InfoUserFragment
+import com.gestion.despacho.presentation.materialsPicking.MaterialsPickingFragment
+import com.gestion.despacho.presentation.stevedores.StevedoresFragment
+import com.gestion.despacho.utils.Constants
+import com.gestion.despacho.utils.DialogManager
 import java.util.concurrent.TimeUnit
 
+@Suppress("DEPRECATION")
 class PickingActivity : AppCompatActivity() {
 
-    private lateinit var binding : ActivityPickingBinding
+    private lateinit var binding: ActivityPickingBinding
     lateinit var id: String
-    lateinit var globalUser: User
+    private lateinit var globalUser: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,24 +42,22 @@ class PickingActivity : AppCompatActivity() {
         bottomNavManager()
 
         val thread = Thread {
-            while (true){
+            while (true) {
                 validateConnection()
-                try{
+                try {
                     TimeUnit.MILLISECONDS.sleep(2000)
-                }catch (e: InterruptedException){
+                } catch (e: InterruptedException) {
                     e.printStackTrace()
                 }
             }
         }
-
         thread.start()
-
     }
 
     private fun bottomNavManager() {
         binding.bottomNavigationView.setOnItemSelectedListener {
 
-            when (it.itemId){
+            when (it.itemId) {
                 R.id.infoPickingFragment -> replaceFragment(InfoPickingFragment())
 
                 R.id.materialsPickingFragment -> replaceFragment(MaterialsPickingFragment())
@@ -74,16 +74,12 @@ class PickingActivity : AppCompatActivity() {
                     fragmentTransaction.replace(R.id.frameLayout, myFragment)
                     fragmentTransaction.commit()
                 }
-
-                else ->{
-
-                }
             }
             true
         }
     }
 
-    private fun replaceFragment(fragment: Fragment){
+    private fun replaceFragment(fragment: Fragment) {
         val bundle = Bundle()
         bundle.putString(Constants.PICKING_FRAGMENT, id)
         val fragmentManager = supportFragmentManager
@@ -93,12 +89,12 @@ class PickingActivity : AppCompatActivity() {
         fragmentTransaction.commit()
     }
 
-    private fun validateConnection(){
+    private fun validateConnection() {
         if (!getConnection()) {
             runOnUiThread {
                 DialogManager.connectionDialog(this)
             }
-        }else{
+        } else {
             runOnUiThread {
                 DialogManager.hideDisconnection()
             }
@@ -106,9 +102,18 @@ class PickingActivity : AppCompatActivity() {
     }
 
     private fun getConnection(): Boolean {
-        val conn: ConnectivityManager = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val networkInfo: NetworkInfo? = conn.activeNetworkInfo
+        val connectivityManager =
+            getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
-        return networkInfo != null && networkInfo.isConnected
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            val capabilities =
+                connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
+            capabilities != null && (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ||
+                    capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) ||
+                    capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET))
+        } else {
+            val activeNetworkInfo = connectivityManager.activeNetworkInfo
+            activeNetworkInfo != null && activeNetworkInfo.isConnected
+        }
     }
 }

@@ -1,46 +1,49 @@
-package com.gestion.gestionmantenimientosoftware.Presentation.ConsultPicking
+package com.gestion.despacho.presentation.consultPicking
 
 import android.app.AlertDialog
-import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.hardware.Camera
-import android.hardware.camera2.CameraAccessException
-import android.hardware.camera2.CameraManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import androidx.activity.OnBackPressedCallback
-import androidx.core.content.ContextCompat
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
-import com.gestion.gestionmantenimientosoftware.Model.User
-import com.gestion.gestionmantenimientosoftware.Presentation.Picking.PickingActivity
-import com.gestion.gestionmantenimientosoftware.R
-import com.gestion.gestionmantenimientosoftware.Utils.Constants
-import com.gestion.gestionmantenimientosoftware.Utils.DialogManager
-import com.gestion.gestionmantenimientosoftware.Utils.PermissionsAwareActivity.getPackageManager
-import com.gestion.gestionmantenimientosoftware.Utils.PermissionsAwareActivity.getSystemService
-import com.gestion.gestionmantenimientosoftware.Utils.SessionManager
-import com.gestion.gestionmantenimientosoftware.Utils.Toast.Toast
-import com.gestion.gestionmantenimientosoftware.databinding.DialogLogoutBinding
-import com.gestion.gestionmantenimientosoftware.databinding.FragmentConsultPickingBinding
+import com.gestion.despacho.model.User
+import com.gestion.despacho.presentation.picking.PickingActivity
+import com.gestion.despacho.R
+import com.gestion.despacho.utils.Constants
+import com.gestion.despacho.utils.DialogManager
+import com.gestion.despacho.utils.SessionManager
+import com.gestion.despacho.utils.Toast.Toast
+import com.gestion.despacho.databinding.DialogLogoutBinding
+import com.gestion.despacho.databinding.FragmentConsultPickingBinding
 import com.google.zxing.integration.android.IntentIntegrator
 import java.time.LocalTime
 
 
 class ConsultPickingFragment : Fragment(R.layout.fragment_consult_picking) {
 
-    lateinit var binding: FragmentConsultPickingBinding
-    lateinit var globalView: View
-    lateinit var globalUser: User
+    private lateinit var binding: FragmentConsultPickingBinding
+    private lateinit var globalView: View
+    private lateinit var globalUser: User
     private val viewModel: ConsultPickingViewModel by viewModels()
-    lateinit var nrPicking: String
-    private var cameraManager: CameraManager? = null
-    private var cameraId: String? = null
-    private var isFlashOn = false
-    val fragment: Fragment = this
+    private lateinit var nrPicking: String
+
+    private val scanLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            val data = result.data
+            val scanResult = IntentIntegrator.parseActivityResult(result.resultCode, data)
+            if (scanResult != null) {
+                if (scanResult.contents == null) {
+                    context?.Toast(getString(R.string.cancelled))
+                } else {
+                    binding.edtNbrPicking.setText(scanResult.contents.padStart(10, '0'))
+                    viewModel.getPicking(scanResult.contents.padStart(10, '0'))
+                }
+            }
+        }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -56,7 +59,7 @@ class ConsultPickingFragment : Fragment(R.layout.fragment_consult_picking) {
     }
 
     private fun setupUser() = with(binding) {
-        arguments?.let{
+        arguments?.let {
             globalUser = ConsultPickingFragmentArgs.fromBundle(it).objUser
 
             tvNameUser.text = globalUser.FullName
@@ -69,7 +72,6 @@ class ConsultPickingFragment : Fragment(R.layout.fragment_consult_picking) {
             if (edtNbrPicking.text.isNotEmpty()) {
                 if (edtNbrPicking.text.length < 10) {
                     viewModel.getPicking(idPicking = edtNbrPicking.text.toString().padStart(10, '0'))
-                    //context?.Toast("El número de entrega debe tener 10 dígitos")
                 } else {
                     viewModel.getPicking(idPicking = edtNbrPicking.text.toString())
                 }
@@ -83,7 +85,7 @@ class ConsultPickingFragment : Fragment(R.layout.fragment_consult_picking) {
         includeHeader.btnLogout.setOnClickListener {
             logOut().show()
         }
-        val callback = object: OnBackPressedCallback(true){
+        val callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 exit().show()
             }
@@ -104,7 +106,7 @@ class ConsultPickingFragment : Fragment(R.layout.fragment_consult_picking) {
         viewModel.pass.observe(viewLifecycleOwner) { flag ->
             if (flag) {
                 goToActivity(picking = nrPicking, user = globalUser)
-                edtNbrPicking.setText("")
+                edtNbrPicking.setText(getString(R.string.empty))
             }
         }
 
@@ -127,7 +129,7 @@ class ConsultPickingFragment : Fragment(R.layout.fragment_consult_picking) {
         builder.setView(bindingAlert.root)
         val alertDialog = builder.create()
 
-        bindingAlert.tvTitleDialog.text = "¿Desea salir de la aplicación?"
+        bindingAlert.tvTitleDialog.text = getString(R.string.do_you_want_to_exit_the_application)
         bindingAlert.btnSiLogOut.setOnClickListener {
             requireActivity().finishAffinity()
             alertDialog.dismiss()
@@ -176,33 +178,18 @@ class ConsultPickingFragment : Fragment(R.layout.fragment_consult_picking) {
     }
 
     private fun initScanner() {
-        val integrator = IntentIntegrator.forSupportFragment(fragment)
+        val integrator = IntentIntegrator.forSupportFragment(this)
         integrator.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES)
-        integrator.setPrompt("Escanea un número de picking")
+        integrator.setPrompt(getString(R.string.scan_picking_number))
         integrator.setBeepEnabled(true)
         val hourIni = LocalTime.of(18, 0)
         val hourFin = LocalTime.of(6, 0)
-        if(LocalTime.now().isAfter(hourIni) || LocalTime.now().isBefore(hourFin)){
+        if (LocalTime.now().isAfter(hourIni) || LocalTime.now().isBefore(hourFin)) {
             integrator.setTorchEnabled(true)
-        }else{
+        } else {
             integrator.setTorchEnabled(false)
         }
-        integrator.initiateScan()
-        //IntentIntegrator.forSupportFragment(fragment).initiateScan()
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
-        if (result != null) {
-            if (result.contents == null) {
-                context?.Toast("Cancelado")
-            } else {
-                binding.edtNbrPicking.setText("")
-                binding.edtNbrPicking.setText(result.contents.padStart(10, '0'))
-                viewModel.getPicking(result.contents.padStart(10, '0'))
-            }
-        } else {
-            fragment.onActivityResult(requestCode, resultCode, data)
-        }
+        scanLauncher.launch(integrator.createScanIntent())
     }
 }
+

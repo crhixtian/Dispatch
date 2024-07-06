@@ -1,4 +1,4 @@
-package com.gestion.gestionmantenimientosoftware.Utils
+package com.gestion.despacho.utils
 
 import java.text.SimpleDateFormat
 import java.util.*

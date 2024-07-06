@@ -1,11 +1,11 @@
-package com.gestion.gestionmantenimientosoftware.Utils
+package com.gestion.despacho.utils
 
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.Window
-import com.gestion.gestionmantenimientosoftware.R
+import com.gestion.despacho.R
 
 object DialogManager {
 

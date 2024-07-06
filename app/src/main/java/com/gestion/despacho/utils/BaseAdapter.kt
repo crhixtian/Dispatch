@@ -1,4 +1,4 @@
-package com.gestion.gestionmantenimientosoftware.Utils
+package com.gestion.despacho.utils
 
 import android.view.View
 import android.view.ViewGroup

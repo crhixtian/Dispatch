@@ -1,13 +1,14 @@
-package com.gestion.gestionmantenimientosoftware.Presentation.InfoUser
+package com.gestion.despacho.presentation.infoUser
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
-import com.gestion.gestionmantenimientosoftware.Model.User
-import com.gestion.gestionmantenimientosoftware.R
-import com.gestion.gestionmantenimientosoftware.Utils.Constants
-import com.gestion.gestionmantenimientosoftware.databinding.FragmentInfoUserBinding
+import com.gestion.despacho.model.User
+import com.gestion.despacho.R
+import com.gestion.despacho.utils.Constants
+import com.gestion.despacho.databinding.FragmentInfoUserBinding
 
+@Suppress("DEPRECATION")
 class InfoUserFragment : Fragment(R.layout.fragment_info_user) {
 
     private lateinit var binding: FragmentInfoUserBinding

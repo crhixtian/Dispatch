@@ -1,17 +1,23 @@
-package com.gestion.gestionmantenimientosoftware.Repository.Picking
+package com.gestion.despacho.repository.picking
 
-import android.os.Build
 import android.util.Log
-import androidx.annotation.RequiresApi
-import com.gestion.gestionmantenimientosoftware.Data.Local.AppDataBase
-import com.gestion.gestionmantenimientosoftware.Data.Remote.Api
-import com.gestion.gestionmantenimientosoftware.Model.*
-import com.gestion.gestionmantenimientosoftware.Utils.Constants
-import com.gestion.gestionmantenimientosoftware.Utils.Format.format
-import com.gestion.gestionmantenimientosoftware.Utils.OperationResult
-import com.gestion.gestionmantenimientosoftware.Utils.SessionManager
-import java.util.*
-import kotlin.Exception
+import com.gestion.despacho.data.local.AppDataBase
+import com.gestion.despacho.data.remote.Api
+import com.gestion.despacho.model.ClsPicking
+import com.gestion.despacho.model.ClsPickingDetail
+import com.gestion.despacho.model.ClsStevedores
+import com.gestion.despacho.model.ObserveMaterialRequest
+import com.gestion.despacho.model.PickingDetail
+import com.gestion.despacho.model.PickingDto
+import com.gestion.despacho.model.PickingLoadRequest
+import com.gestion.despacho.model.StatusPickingRequest
+import com.gestion.despacho.model.Stevedores
+import com.gestion.despacho.model.StevedoresRequest
+import com.gestion.despacho.utils.Constants
+import com.gestion.despacho.utils.Format.format
+import com.gestion.despacho.utils.OperationResult
+import com.gestion.despacho.utils.SessionManager
+import java.util.Calendar
 
 class PickingRepositoryImp : PickingRepository {
 
@@ -22,56 +28,57 @@ class PickingRepositoryImp : PickingRepository {
     }
 
     override suspend fun getPicking(idPicking: String): OperationResult<PickingDto> {
-
         return try {
             val response = Api.build().getPicking(idPicking)
-
             if (response.isSuccessful) {
-                when(AppDataBase.instance?.pickingDao()?.getCountPicking()){
-                    1 -> {
-                        if (cleanDB() > 0) {
-                            if (savePicking(response.body()!!.Data) > 0) {
-                                if (savePickingDetail(response.body()!!.Data.pickingDet) > 0) {
-                                    OperationResult.Complete(response.body())
-                                } else {
-                                    OperationResult.Failure(java.lang.Exception("Error al guarda detalle"))
-                                }
-                            } else {
-                                OperationResult.Failure(java.lang.Exception("Error al obtener el picking"))
-                            }
-                        } else {
-                            OperationResult.Failure(java.lang.Exception("Error al limpiar la BD"))
-                        }
-                    }
-                    0 -> {
-                        if (savePicking(response.body()!!.Data) > 0) {
-                            if (savePickingDetail(response.body()!!.Data.pickingDet) > 0) {
-                                OperationResult.Complete(response.body())
-                            } else {
-                                OperationResult.Failure(java.lang.Exception("Error al guarda detalle"))
-                            }
-                        } else {
-                            OperationResult.Failure(java.lang.Exception("Error al obtener el picking"))
-                        }
-                    }
-
-                    else -> {OperationResult.Failure(java.lang.Exception("Ocurrió un error obteniendo el número de pickings"))}
-                }
+                handleDatabaseOperations(response.body()!!)
             } else {
-                OperationResult.Failure(java.lang.Exception(response.body()?.Description))
+                OperationResult.Failure(Exception(response.body()?.Description))
             }
         } catch (e: Exception) {
             OperationResult.Failure(e)
         }
     }
 
-    override suspend fun savePicking(p: com.gestion.gestionmantenimientosoftware.Model.Picking): Int {
+    private suspend fun handleDatabaseOperations(pickingDto: PickingDto): OperationResult<PickingDto> {
+        return when (AppDataBase.instance?.pickingDao()?.getCountPicking()) {
+            1 -> handleSinglePicking(pickingDto)
+            0 -> handleEmptyDatabase(pickingDto)
+            else -> OperationResult.Failure(Exception("Ocurrió un error obteniendo el número de pickings"))
+        }
+    }
+
+    private suspend fun handleSinglePicking(pickingDto: PickingDto): OperationResult<PickingDto> {
+        return if (cleanDB() > 0) {
+            handleSavePicking(pickingDto)
+        } else {
+            OperationResult.Failure(Exception("Error al limpiar la BD"))
+        }
+    }
+
+    private suspend fun handleEmptyDatabase(pickingDto: PickingDto): OperationResult<PickingDto> {
+        return handleSavePicking(pickingDto)
+    }
+
+    private suspend fun handleSavePicking(pickingDto: PickingDto): OperationResult<PickingDto> {
+        return if (savePicking(pickingDto.Data) > 0) {
+            if (savePickingDetail(pickingDto.Data.pickingDet) > 0) {
+                OperationResult.Complete(pickingDto)
+            } else {
+                OperationResult.Failure(Exception("Error al guardar detalle"))
+            }
+        } else {
+            OperationResult.Failure(Exception("Error al obtener el picking"))
+        }
+    }
+
+    override suspend fun savePicking(picking: com.gestion.despacho.model.Picking): Int {
         var response: Long = 0
         try {
-            SessionManager().saveStatus(p.status)
+            SessionManager().saveStatus(picking.status)
             val objPicking = ClsPicking(
-                0, p.nbrpicking, p.date_deliv, p.date_mov_goods,
-                p.cod_sap_requ, p.petitioner, p.plate, p.driver, p.license, p.Hour, 1, p.observation
+                0, picking.nbrpicking, picking.date_deliv, picking.date_mov_goods,
+                picking.cod_sap_requ, picking.petitioner, picking.plate, picking.driver, picking.license, picking.Hour, 1, picking.observation
             )
 
             response = AppDataBase.instance?.pickingDao()?.insert(objPicking)!!
@@ -238,7 +245,14 @@ class PickingRepositoryImp : PickingRepository {
             SessionManager().getUsuario().let {
                 val obs = AppDataBase.instance?.pickingDao()?.getObservation(id)
                 val response = Api.build()
-                    .statusPicking(StatusPickingRequest(id, 1, obs, SessionManager().getUsuario()!!))
+                    .statusPicking(
+                        StatusPickingRequest(
+                            id,
+                            1,
+                            obs,
+                            SessionManager().getUsuario()!!
+                        )
+                    )
                 if (response.isSuccessful) {
                     if (response.body()?.Code == 200) {
                         OperationResult.Complete(response.body()?.Code)
@@ -291,18 +305,13 @@ class PickingRepositoryImp : PickingRepository {
                 }
             }
             println(response)
-            if (response != null) {
-                OperationResult.Complete("Picking observado")
-            } else {
-                OperationResult.Failure(java.lang.Exception("Ocurrió un error"))
-            }
+            OperationResult.Complete("Picking observado")
 
         } catch (e: Exception) {
             OperationResult.Failure(e)
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override suspend fun startLoad(
         picking: ClsPickingDetail,
         nbrLot: String
@@ -324,7 +333,6 @@ class PickingRepositoryImp : PickingRepository {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override suspend fun endLoad(picking: ClsPickingDetail): OperationResult<String> {
         return try {
             picking.endDate = "${getDate()} ${getHour()}"
@@ -439,7 +447,6 @@ class PickingRepositoryImp : PickingRepository {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override suspend fun startLoadApi(
         entity: ClsPickingDetail,
         edtNbrLot: String
@@ -479,8 +486,6 @@ class PickingRepositoryImp : PickingRepository {
 
     override suspend fun addStevedor(objStevedor: ClsStevedores): OperationResult<Int> {
         return try {
-            /*val list = mutableListOf<Stevedores>()
-            list.add(Stevedores(objStevedor.nombre, objStevedor.dni))*/
 
             val nbrPicking =
                 AppDataBase.instance?.pickingDao()?.getNbrPicking(objStevedor.IdPicking)
@@ -506,7 +511,6 @@ class PickingRepositoryImp : PickingRepository {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override suspend fun endLoadApi(entity: ClsPickingDetail): OperationResult<Int> {
         return try {
             val nbrPicking = AppDataBase.instance?.pickingDao()?.getNbrPicking(entity.IdPicking)
@@ -541,7 +545,6 @@ class PickingRepositoryImp : PickingRepository {
         return now.format(Constants.DATE_FORMAT_FULL)
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun getHour(): String {
         val time = Calendar.getInstance()
         return time.format(Constants.HOUR_FORMAT)

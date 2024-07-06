@@ -1,4 +1,4 @@
-package com.gestion.gestionmantenimientosoftware
+package com.gestion.despacho
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

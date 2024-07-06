@@ -1,13 +1,13 @@
-package com.gestion.gestionmantenimientosoftware.Presentation.Stevedores
+package com.gestion.despacho.presentation.stevedores
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.gestion.gestionmantenimientosoftware.Model.ClsStevedores
-import com.gestion.gestionmantenimientosoftware.Repository.Picking.PickingRepository
-import com.gestion.gestionmantenimientosoftware.Repository.Picking.PickingRepositoryImp
-import com.gestion.gestionmantenimientosoftware.Utils.OperationResult
+import com.gestion.despacho.model.ClsStevedores
+import com.gestion.despacho.repository.picking.PickingRepository
+import com.gestion.despacho.repository.picking.PickingRepositoryImp
+import com.gestion.despacho.utils.OperationResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -23,11 +23,11 @@ class StevedoresViewModel : ViewModel() {
     private var _message: MutableLiveData<String> = MutableLiveData()
     val message: LiveData<String> = _message
 
-    var pickingRepository: PickingRepository = PickingRepositoryImp()
+    private var pickingRepository: PickingRepository = PickingRepositoryImp()
     val stevedores = PickingRepositoryImp.Picking.getStevedores
 
     fun edit(stevedor: ClsStevedores) {
-        viewModelScope.launch(Dispatchers.Main) {
+        viewModelScope.launch {
             try {
                 _loader.value = true
                 val response = withContext(Dispatchers.IO) {
@@ -43,11 +43,13 @@ class StevedoresViewModel : ViewModel() {
                                 is OperationResult.Complete -> {
                                     _message.value = responseDb.data
                                 }
+
                                 is OperationResult.Failure -> _error.value =
                                     responseDb.exception?.message.toString()
                             }
                         }
                     }
+
                     is OperationResult.Failure -> _error.value =
                         response.exception?.message.toString()
                 }
@@ -58,8 +60,9 @@ class StevedoresViewModel : ViewModel() {
             }
         }
     }
+
     fun delete(stevedor: ClsStevedores) {
-        viewModelScope.launch(Dispatchers.Main) {
+        viewModelScope.launch {
             try {
                 _loader.value = true
                 val response = withContext(Dispatchers.IO) {
@@ -75,11 +78,13 @@ class StevedoresViewModel : ViewModel() {
                                 is OperationResult.Complete -> {
                                     _message.value = responseDb.data
                                 }
+
                                 is OperationResult.Failure -> _error.value =
                                     responseDb.exception?.message.toString()
                             }
                         }
                     }
+
                     is OperationResult.Failure -> _error.value =
                         response.exception?.message.toString()
                 }
@@ -93,7 +98,7 @@ class StevedoresViewModel : ViewModel() {
     }
 
     fun loadData(id: String) {
-        viewModelScope.launch(Dispatchers.Main) {
+        viewModelScope.launch {
             try {
                 _loader.value = true
 
@@ -109,6 +114,7 @@ class StevedoresViewModel : ViewModel() {
                             _error.value = response.data?.Description
                         }
                     }
+
                     is OperationResult.Failure -> {
                         _error.value = response.exception?.message.toString()
                     }
@@ -119,7 +125,6 @@ class StevedoresViewModel : ViewModel() {
             } finally {
                 _loader.value = false
             }
-
         }
     }
 }

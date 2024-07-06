@@ -1,8 +1,8 @@
-package com.gestion.gestionmantenimientosoftware.Presentation.ValidatedPicking
+package com.gestion.despacho.presentation.validatedPicking
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.gestion.gestionmantenimientosoftware.R
+import com.gestion.despacho.R
 
 class ValidatedPickingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

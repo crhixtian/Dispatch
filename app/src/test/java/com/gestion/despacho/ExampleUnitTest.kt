@@ -1,4 +1,4 @@
-package com.gestion.gestionmantenimientosoftware
+package com.gestion.despacho
 
 import org.junit.Test
 

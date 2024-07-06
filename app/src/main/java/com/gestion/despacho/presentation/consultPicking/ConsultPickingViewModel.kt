@@ -1,13 +1,13 @@
-package com.gestion.gestionmantenimientosoftware.Presentation.ConsultPicking
+package com.gestion.despacho.presentation.consultPicking
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.gestion.gestionmantenimientosoftware.Repository.Picking.PickingRepository
-import com.gestion.gestionmantenimientosoftware.Repository.Picking.PickingRepositoryImp
-import com.gestion.gestionmantenimientosoftware.Utils.Constants
-import com.gestion.gestionmantenimientosoftware.Utils.OperationResult
+import com.gestion.despacho.repository.picking.PickingRepository
+import com.gestion.despacho.repository.picking.PickingRepositoryImp
+import com.gestion.despacho.utils.Constants
+import com.gestion.despacho.utils.OperationResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -32,10 +32,10 @@ class ConsultPickingViewModel: ViewModel() {
     private var _nbrPicking: MutableLiveData<String> = MutableLiveData()
     val nbrPicking: LiveData<String> = _nbrPicking
 
-    var pickingRepository: PickingRepository = PickingRepositoryImp()
+    private var pickingRepository: PickingRepository = PickingRepositoryImp()
 
     fun getPicking(idPicking: String){
-        viewModelScope.launch(Dispatchers.Main) {
+        viewModelScope.launch {
             try {
                 _loader.value = true
 
@@ -71,88 +71,4 @@ class ConsultPickingViewModel: ViewModel() {
 
         }
     }
-    /*private fun cleanDB(picking: Picking) {
-        viewModelScope.launch(Dispatchers.Main) {
-            try{
-                _loader.value = true
-                val response = withContext(Dispatchers.IO){
-                    pickingRepository.cleanDB()
-                }
-
-                /*when(response){
-                    is OperationResult.Complete ->{
-                        if(response.data == Constants.RESPONSE_SUCCESSFULLY){
-                         savePicking(picking)
-                        }
-                    }
-                    is OperationResult.Failure -> {
-                        _error.value = response.exception?.message.toString()
-                    }
-                }*/
-            }catch (e: Exception){
-                _error.value = e.message
-            }finally {
-                _loader.value = false
-            }
-        }
-    }*/
-    /*private fun savePicking(picking: Picking) {
-
-        viewModelScope.launch(Dispatchers.Main){
-            try{
-                _loader.value = true
-                val response = withContext(Dispatchers.IO){
-                    pickingRepository.savePicking(picking)
-                }
-
-                /*when(response){
-                    is OperationResult.Complete ->{
-                        //_message.value = response.data
-                        savePickingDetails(picking.pickingDet)
-                    }
-                    is OperationResult.Failure -> {
-                        _error.value = response.exception?.message.toString()
-                    }
-                }*/
-
-            }catch (e: Exception){
-                _error.value = e.message
-            }finally {
-                _loader.value = false
-            }
-        }
-    }*/
-
-    /*private fun savePickingDetails(picking: List<PickingDetail>) {
-
-        viewModelScope.launch(Dispatchers.Main){
-            try{
-                _loader.value = true
-                val response = withContext(Dispatchers.IO){
-                    pickingRepository.savePickingDetail(picking)
-                }
-
-                /*when(response){
-
-                    is OperationResult.Complete ->{
-                        if(response.data == Constants.RESPONSE_SUCCESSFULLY){
-                            _message.value = Constants.RESPONSE_SUCCESSFULLY_DETAILS
-                            _pass.value = true
-                        }
-                    }
-                    is OperationResult.Failure -> {
-                        _error.value = response.exception?.message.toString()
-                        _pass.value = false
-                    }
-                }*/
-
-            }catch (e: Exception){
-                _error.value = e.message
-                _pass.value = false
-            }finally {
-                _loader.value = false
-            }
-        }
-    }*/
-
 }

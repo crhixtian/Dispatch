@@ -1,9 +1,9 @@
-package com.gestion.gestionmantenimientosoftware.Application
+package com.gestion.despacho.application
 
 import android.app.Application
 import android.content.Context
-import com.gestion.gestionmantenimientosoftware.Data.Local.AppDataBase
-import com.gestion.gestionmantenimientosoftware.Utils.SessionManager
+import com.gestion.despacho.data.local.AppDataBase
+import com.gestion.despacho.utils.SessionManager
 
 class App: Application() {
 

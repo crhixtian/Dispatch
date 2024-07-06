@@ -1,8 +1,8 @@
-package com.gestion.gestionmantenimientosoftware.Utils
+package com.gestion.despacho.utils
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.gestion.gestionmantenimientosoftware.Model.User
+import com.gestion.despacho.model.User
 
 class SessionManager {
 

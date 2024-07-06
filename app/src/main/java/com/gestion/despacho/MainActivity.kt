@@ -1,4 +1,4 @@
-package com.gestion.gestionmantenimientosoftware
+package com.gestion.despacho
 
 import android.Manifest
 import android.app.AlertDialog
@@ -10,9 +10,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.gestion.gestionmantenimientosoftware.Utils.DialogManager
-import com.gestion.gestionmantenimientosoftware.Utils.Toast.Toast
-import com.gestion.gestionmantenimientosoftware.databinding.ActivityMainBinding
+import com.gestion.despacho.utils.DialogManager
+import com.gestion.despacho.utils.Toast.Toast
+import com.gestion.despacho.databinding.ActivityMainBinding
 import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {

@@ -1,7 +1,7 @@
-package com.gestion.gestionmantenimientosoftware.Data.Remote
+package com.gestion.despacho.data.remote
 
-import com.gestion.gestionmantenimientosoftware.Model.*
-import com.gestion.gestionmantenimientosoftware.Utils.SessionManager
+import com.gestion.despacho.model.*
+import com.gestion.despacho.utils.SessionManager
 import okhttp3.OkHttpClient
 import retrofit2.Response
 import retrofit2.Retrofit

@@ -1,23 +1,21 @@
-package com.gestion.gestionmantenimientosoftware.Presentation.Login
+package com.gestion.despacho.presentation.login
 
 import android.app.AlertDialog
-import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import androidx.activity.OnBackPressedCallback
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
-import com.gestion.gestionmantenimientosoftware.Model.User
-import com.gestion.gestionmantenimientosoftware.R
-import com.gestion.gestionmantenimientosoftware.Utils.Constants
-import com.gestion.gestionmantenimientosoftware.Utils.DialogManager
-import com.gestion.gestionmantenimientosoftware.Utils.SessionManager
-import com.gestion.gestionmantenimientosoftware.Utils.Toast.Toast
-import com.gestion.gestionmantenimientosoftware.databinding.DialogApiBinding
-import com.gestion.gestionmantenimientosoftware.databinding.FragmentLoginBinding
+import com.gestion.despacho.model.User
+import com.gestion.despacho.R
+import com.gestion.despacho.utils.Constants
+import com.gestion.despacho.utils.DialogManager
+import com.gestion.despacho.utils.SessionManager
+import com.gestion.despacho.utils.Toast.Toast
+import com.gestion.despacho.databinding.DialogApiBinding
+import com.gestion.despacho.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
 

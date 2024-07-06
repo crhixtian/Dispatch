@@ -1,12 +1,12 @@
-package com.gestion.gestionmantenimientosoftware.Repository.Mail
+package com.gestion.despacho.repository.mail
 
 import android.content.Context
-import com.gestion.gestionmantenimientosoftware.Model.PickingDto
-import com.gestion.gestionmantenimientosoftware.Data.Remote.Api
-import com.gestion.gestionmantenimientosoftware.Repository.Pdf.PdfRepository
-import com.gestion.gestionmantenimientosoftware.Repository.Pdf.PdfRepositoryImp
-import com.gestion.gestionmantenimientosoftware.Utils.Constants
-import com.gestion.gestionmantenimientosoftware.Utils.SessionManager
+import com.gestion.despacho.model.PickingDto
+import com.gestion.despacho.data.remote.Api
+import com.gestion.despacho.repository.pdf.PdfRepository
+import com.gestion.despacho.repository.pdf.PdfRepositoryImp
+import com.gestion.despacho.utils.Constants
+import com.gestion.despacho.utils.SessionManager
 import com.github.alvarosct02.mailing.MailSender
 import io.reactivex.Completable
 

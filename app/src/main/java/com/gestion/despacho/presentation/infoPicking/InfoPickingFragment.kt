@@ -1,4 +1,4 @@
-package com.gestion.gestionmantenimientosoftware.Presentation.InfoPicking
+package com.gestion.despacho.presentation.infoPicking
 
 import android.app.AlertDialog
 import android.content.Intent
@@ -8,15 +8,15 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
-import com.gestion.gestionmantenimientosoftware.Model.ClsPicking
-import com.gestion.gestionmantenimientosoftware.MainActivity
-import com.gestion.gestionmantenimientosoftware.R
-import com.gestion.gestionmantenimientosoftware.Utils.Constants
-import com.gestion.gestionmantenimientosoftware.Utils.DialogManager
-import com.gestion.gestionmantenimientosoftware.Utils.SessionManager
-import com.gestion.gestionmantenimientosoftware.Utils.Toast.Toast
-import com.gestion.gestionmantenimientosoftware.databinding.DialogLogoutBinding
-import com.gestion.gestionmantenimientosoftware.databinding.FragmentInfoPickingBinding
+import com.gestion.despacho.model.ClsPicking
+import com.gestion.despacho.MainActivity
+import com.gestion.despacho.R
+import com.gestion.despacho.utils.Constants
+import com.gestion.despacho.utils.DialogManager
+import com.gestion.despacho.utils.SessionManager
+import com.gestion.despacho.utils.Toast.Toast
+import com.gestion.despacho.databinding.DialogLogoutBinding
+import com.gestion.despacho.databinding.FragmentInfoPickingBinding
 
 class InfoPickingFragment : Fragment(R.layout.fragment_info_picking) {
 
@@ -30,15 +30,9 @@ class InfoPickingFragment : Fragment(R.layout.fragment_info_picking) {
 
         binding = FragmentInfoPickingBinding.bind(view)
         globalView = view
-    }
 
-    @Deprecated("Deprecated in Java")
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-        if(arguments != null){
-            id = arguments!!.getString(Constants.PICKING_FRAGMENT).toString()
-
+        arguments?.let {
+            id = requireArguments().getString(Constants.PICKING_FRAGMENT).toString()
             loadData()
             observers()
             events()
@@ -51,9 +45,6 @@ class InfoPickingFragment : Fragment(R.layout.fragment_info_picking) {
         when(SessionManager().getStatus()){
             1 -> {
                 lyValidate.setBackgroundResource(R.drawable.ic_check)
-            }
-            2 ->{
-                //requireContext().Toast("Picking por atender")
             }
             3 -> {
                 lyValidate.setBackgroundResource(R.drawable.ic_warning)
@@ -97,7 +88,7 @@ class InfoPickingFragment : Fragment(R.layout.fragment_info_picking) {
             }
 
             Constants.HOME -> {
-                bindingAlert.tvTitleDialog.text = "¿Desea salir del picking?"
+                bindingAlert.tvTitleDialog.text = getString(R.string.do_you_want_to_exit_picking)
                 bindingAlert.btnSiLogOut.setOnClickListener {
                     requireActivity().startActivity(Intent(requireActivity(), MainActivity::class.java))
                     alertDialog.dismiss()
@@ -114,7 +105,7 @@ class InfoPickingFragment : Fragment(R.layout.fragment_info_picking) {
         viewModel.getInfoPicking(id = id)
     }
 
-    private fun observers() = with(binding){
+    private fun observers() {
         viewModel.infoPicking?.observe(viewLifecycleOwner){picking ->
             picking?.let {
                 setupLyPicking(picking = picking)
@@ -127,7 +118,7 @@ class InfoPickingFragment : Fragment(R.layout.fragment_info_picking) {
             if (flag) DialogManager.showProgress(requireContext())
             else DialogManager.hideProgress()
         }
-        viewModel.message.observe(viewLifecycleOwner) {m ->
+        return viewModel.message.observe(viewLifecycleOwner) { m ->
             if( m == "SUCCESS"){
                 setupIconValidate()
             }
@@ -147,7 +138,6 @@ class InfoPickingFragment : Fragment(R.layout.fragment_info_picking) {
             if(it.observation.toString().isNotEmpty()){
                 tvObs.text = it.observation
             }
-
         }
     }
 }

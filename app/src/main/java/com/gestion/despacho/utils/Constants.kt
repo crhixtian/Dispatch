@@ -1,6 +1,6 @@
-package com.gestion.gestionmantenimientosoftware.Utils
+package com.gestion.despacho.utils
 
-import com.gestion.gestionmantenimientosoftware.BuildConfig
+import com.gestion.despacho.BuildConfig
 
 
 object Constants {

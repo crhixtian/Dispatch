@@ -1,13 +1,13 @@
-package com.gestion.gestionmantenimientosoftware.Presentation.InfoPicking
+package com.gestion.despacho.presentation.infoPicking
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.gestion.gestionmantenimientosoftware.Model.ClsPicking
-import com.gestion.gestionmantenimientosoftware.Repository.Picking.PickingRepository
-import com.gestion.gestionmantenimientosoftware.Repository.Picking.PickingRepositoryImp
-import com.gestion.gestionmantenimientosoftware.Utils.OperationResult
+import com.gestion.despacho.model.ClsPicking
+import com.gestion.despacho.repository.picking.PickingRepository
+import com.gestion.despacho.repository.picking.PickingRepositoryImp
+import com.gestion.despacho.utils.OperationResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -26,10 +26,10 @@ class InfoPickingViewModel : ViewModel() {
     private var _picking: MutableLiveData<ClsPicking> = MutableLiveData()
     val picking: LiveData<ClsPicking> = _picking
 
-    var pickingRepository: PickingRepository = PickingRepositoryImp()
+    private var pickingRepository: PickingRepository = PickingRepositoryImp()
     val infoPicking = PickingRepositoryImp.Picking.getInfoPickingDB
     fun getInfoPicking(id: String) {
-        viewModelScope.launch(Dispatchers.Main) {
+        viewModelScope.launch {
             try {
                 val response = withContext(Dispatchers.IO) {
                     pickingRepository.getInfoPicking(id = id)
@@ -50,7 +50,7 @@ class InfoPickingViewModel : ViewModel() {
     }
 
     fun loadData(id: String) {
-        viewModelScope.launch(Dispatchers.Main) {
+        viewModelScope.launch {
             try {
                 _loader.value = true
 

@@ -1,4 +1,4 @@
-package com.gestion.gestionmantenimientosoftware.Utils
+package com.gestion.despacho.utils
 
 import android.content.Context
 import android.widget.Toast

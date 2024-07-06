@@ -1,7 +1,7 @@
-package com.gestion.gestionmantenimientosoftware.Repository.Pdf
+package com.gestion.despacho.repository.pdf
 
 import android.content.Context
-import com.gestion.gestionmantenimientosoftware.Model.PickingDto
+import com.gestion.despacho.model.PickingDto
 import java.io.File
 
 interface PdfRepository {

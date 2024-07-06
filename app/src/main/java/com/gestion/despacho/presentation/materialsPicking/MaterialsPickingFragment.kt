@@ -1,27 +1,30 @@
-package com.gestion.gestionmantenimientosoftware.Presentation.MaterialsPicking
+package com.gestion.despacho.presentation.materialsPicking
 
-import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
-import androidx.annotation.RequiresApi
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.gestion.gestionmantenimientosoftware.Model.ClsPickingDetail
-import com.gestion.gestionmantenimientosoftware.MainActivity
-import com.gestion.gestionmantenimientosoftware.Presentation.ValidatedPicking.ValidatedPickingActivity
-import com.gestion.gestionmantenimientosoftware.R
-import com.gestion.gestionmantenimientosoftware.Utils.BaseAdapter
-import com.gestion.gestionmantenimientosoftware.Utils.Constants
-import com.gestion.gestionmantenimientosoftware.Utils.DialogManager
-import com.gestion.gestionmantenimientosoftware.Utils.SessionManager
-import com.gestion.gestionmantenimientosoftware.Utils.Toast.Toast
-import com.gestion.gestionmantenimientosoftware.databinding.*
+import com.gestion.despacho.MainActivity
+import com.gestion.despacho.R
+import com.gestion.despacho.databinding.DialogAddStevedorBinding
+import com.gestion.despacho.databinding.DialogEndloadBinding
+import com.gestion.despacho.databinding.DialogLogoutBinding
+import com.gestion.despacho.databinding.DialogObservationBinding
+import com.gestion.despacho.databinding.DialogStartloadBinding
+import com.gestion.despacho.databinding.FragmentMaterialsPickingBinding
+import com.gestion.despacho.databinding.ItemMaterialBinding
+import com.gestion.despacho.model.ClsPickingDetail
+import com.gestion.despacho.presentation.validatedPicking.ValidatedPickingActivity
+import com.gestion.despacho.utils.BaseAdapter
+import com.gestion.despacho.utils.Constants
+import com.gestion.despacho.utils.DialogManager
+import com.gestion.despacho.utils.SessionManager
+import com.gestion.despacho.utils.Toast.Toast
 
 class MaterialsPickingFragment : Fragment(R.layout.fragment_materials_picking) {
 
@@ -38,9 +41,14 @@ class MaterialsPickingFragment : Fragment(R.layout.fragment_materials_picking) {
                 return object : BaseViewHolder<ClsPickingDetail>(view) {
                     private val binding: ItemMaterialBinding = ItemMaterialBinding.bind(view)
 
-                    @RequiresApi(Build.VERSION_CODES.O)
-                    @SuppressLint("SetTextI18n")
-                    override fun bind(entity: ClsPickingDetail) = with(binding) {
+                    override fun bind(entity: ClsPickingDetail) {
+                        setMaterialDetails(entity)
+                        handleSessionStatus(entity)
+                        handleRoleBasedUI()
+                        return setButtonListeners(entity)
+                    }
+
+                    private fun setMaterialDetails(entity: ClsPickingDetail) = with(binding) {
                         tvMaterial.text = entity.material
                         tvQuantity.text = entity.quantity.toString()
                         tvTon.text = entity.ton.toString()
@@ -49,45 +57,57 @@ class MaterialsPickingFragment : Fragment(R.layout.fragment_materials_picking) {
                         tvStart.text = entity.startDate
                         tvEnd.text = entity.endDate
                         tvObservation.text = entity.observation
+                    }
 
+                    private fun handleSessionStatus(entity: ClsPickingDetail) = with(binding) {
                         if (SessionManager().getStatus() == 1) {
                             btnAddStvedor.visibility = View.GONE
                             btnObservation.visibility = View.GONE
                         } else {
                             root.setOnClickListener {
-                                if (SessionManager().getRolId() == 6) {
-                                    if (entity.startDate == "") {
-                                        starLoad(entity).show()
-                                    } else if (entity.endDate!!.isNotEmpty()) {
-                                        context?.Toast("Ya se finalizó la carga")
-                                    } else {
-                                        checkStevedores(entity)
-                                    }
-                                }
+                                handleRootClick(entity)
                             }
                         }
+                    }
 
+                    private fun handleRootClick(entity: ClsPickingDetail) {
+                        val context = binding.root.context
+                        if (SessionManager().getRolId() == 6) {
+                            when {
+                                entity.startDate.isNullOrEmpty() -> starLoad(entity).show()
+                                !entity.endDate.isNullOrEmpty() -> context.Toast(context.getString(R.string.loading_finished))
+                                else -> checkStevedores(entity)
+                            }
+                        }
+                    }
+
+                    private fun handleRoleBasedUI() = with(binding) {
                         when (SessionManager().getRolId()) {
-                            //Verificador torre de control - Supervisor solo consulta
                             4, 7 -> {
                                 btnAddStvedor.visibility = View.GONE
                                 btnObservation.visibility = View.GONE
                             }
                         }
+                    }
 
+                    private fun setButtonListeners(entity: ClsPickingDetail) = with(binding) {
                         btnAddStvedor.setOnClickListener { addStevedor(entity).show() }
-                        btnObservation.setOnClickListener{
-                            if(entity.startDate == ""){
-                                context?.Toast("Primero debe iniciar la carga del material")
-                            }else{
-                                logOut(Constants.OBSERVE_MATERIAL, entity).show()
-                            }
+                        btnObservation.setOnClickListener {
+                            handleObservationClick(entity)
+                        }
+                    }
+
+                    private fun handleObservationClick(entity: ClsPickingDetail) {
+                        val context = binding.root.context
+                        if (entity.startDate.isNullOrEmpty()) {
+                            context.Toast(context.getString(R.string.you_must_first_start_loading_the_material))
+                        } else {
+                            logOut(Constants.OBSERVE_MATERIAL, entity).show()
                         }
                     }
                 }
             }
         }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -97,35 +117,28 @@ class MaterialsPickingFragment : Fragment(R.layout.fragment_materials_picking) {
 
         setupView()
         setupAdapter()
-        //binding.btnPdf.visibility = View.VISIBLE
+
         binding.btnPdf.setOnClickListener {
             sendMail()
         }
-    }
-
-    private fun setupView() {
-        when (SessionManager().getRolId()) {
-            //Despachador responsable - Supervisor solo consulta
-            6, 7 -> {
-                binding.linearLayoutButton.visibility = View.GONE
-                binding.btnValidate.visibility = View.GONE
-                binding.btnObserve.visibility = View.GONE
-            }
-        }
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    @Deprecated("Deprecated in Java")
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
 
         if (arguments != null) {
-            id = arguments!!.getString(Constants.PICKING_FRAGMENT).toString()
+            id = requireArguments().getString(Constants.PICKING_FRAGMENT).toString()
             binding.tvPicking.text = id
 
             status()
             observers()
             events()
+        }
+    }
+
+    private fun setupView() {
+        when (SessionManager().getRolId()) {
+            6, 7 -> {
+                binding.linearLayoutButton.visibility = View.GONE
+                binding.btnValidate.visibility = View.GONE
+                binding.btnObserve.visibility = View.GONE
+            }
         }
     }
 
@@ -138,8 +151,7 @@ class MaterialsPickingFragment : Fragment(R.layout.fragment_materials_picking) {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun observers() = with(binding) {
+    private fun observers() {
         viewModel.pickingDet?.observe(viewLifecycleOwner) { pickingDet ->
             adapter.updateList(nData = pickingDet)
         }
@@ -157,7 +169,6 @@ class MaterialsPickingFragment : Fragment(R.layout.fragment_materials_picking) {
             endLoad(entity = pickingDet).show()
         }
         viewModel.pdf.observe(viewLifecycleOwner) {
-            //if(it) sendMail()
         }
         viewModel.response.observe(viewLifecycleOwner) { response ->
             if (response) sendMail()
@@ -166,14 +177,13 @@ class MaterialsPickingFragment : Fragment(R.layout.fragment_materials_picking) {
             getSuccess(picking.nbrpicking)
         }
         viewModel.observe.observe(viewLifecycleOwner) {
-            if(it) observePicking(id = id).show()
+            if (it) observePicking(id = id).show()
         }
-        viewModel.getObserve.observe(viewLifecycleOwner){
+        return viewModel.getObserve.observe(viewLifecycleOwner) {
             if (it) getObserve()
         }
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
     private fun sendMail() {
         viewModel.sendMail(id, requireContext())
     }
@@ -191,14 +201,12 @@ class MaterialsPickingFragment : Fragment(R.layout.fragment_materials_picking) {
         requireActivity().startActivity(Intent(requireActivity(), MainActivity::class.java))
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun events() {
         binding.btnValidate.setOnClickListener {
             logOut(origin = Constants.VALIDATE, null).show()
         }
         binding.btnObserve.setOnClickListener {
             logOut(origin = Constants.OBSERVE, null).show()
-            //observePicking(id = id).show()
         }
         binding.includeHeader.imgHome.setOnClickListener {
             logOut(origin = Constants.HOME, null).show()
@@ -210,7 +218,7 @@ class MaterialsPickingFragment : Fragment(R.layout.fragment_materials_picking) {
             viewModel.loadData(id)
             binding.swipeMaterials.isRefreshing = false
         }
-        val callback = object: OnBackPressedCallback(true){
+        val callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 logOut(Constants.HOME, null).show()
             }
@@ -218,28 +226,34 @@ class MaterialsPickingFragment : Fragment(R.layout.fragment_materials_picking) {
         requireActivity().onBackPressedDispatcher.addCallback(callback)
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun logOut(origin: String, material: ClsPickingDetail?): AlertDialog {
         val bindingAlert = DialogLogoutBinding.inflate(LayoutInflater.from(context))
-        val builder =  AlertDialog.Builder(context)
+        val builder = AlertDialog.Builder(context)
         builder.setView(bindingAlert.root)
         val alertDialog = builder.create()
 
-        when(origin){
+        when (origin) {
 
             Constants.LOG_OUT -> {
 
-                bindingAlert.tvTitleDialog.text = "¿Seguro que desea cerrar sesión?"
+                bindingAlert.tvTitleDialog.text =
+                    getString(R.string.are_you_sure_you_want_to_log_out)
 
                 bindingAlert.btnSiLogOut.setOnClickListener {
                     SessionManager().saveStatuSession(status = false)
-                    requireActivity().startActivity(Intent(requireActivity(), MainActivity::class.java))
+                    requireActivity().startActivity(
+                        Intent(
+                            requireActivity(),
+                            MainActivity::class.java
+                        )
+                    )
                     alertDialog.dismiss()
                 }
             }
 
             Constants.VALIDATE -> {
-                bindingAlert.tvTitleDialog.text = "¿Seguro que desea validar el picking?"
+                bindingAlert.tvTitleDialog.text =
+                    getString(R.string.are_you_sure_you_want_to_validate_the_picking)
 
                 bindingAlert.btnSiLogOut.setOnClickListener {
                     viewModel.checkPicking(id = id, Constants.VALIDATE)
@@ -249,7 +263,8 @@ class MaterialsPickingFragment : Fragment(R.layout.fragment_materials_picking) {
 
             Constants.OBSERVE -> {
 
-                bindingAlert.tvTitleDialog.text = "¿Seguro que desea observar el picking?"
+                bindingAlert.tvTitleDialog.text =
+                    getString(R.string.are_you_sure_you_want_to_look_at_the_picking)
 
                 bindingAlert.btnSiLogOut.setOnClickListener {
                     viewModel.checkPicking(id = id, Constants.OBSERVE)
@@ -259,7 +274,8 @@ class MaterialsPickingFragment : Fragment(R.layout.fragment_materials_picking) {
             }
 
             Constants.OBSERVE_MATERIAL -> {
-                bindingAlert.tvTitleDialog.text = "¿Seguro que desea observar el material?"
+                bindingAlert.tvTitleDialog.text =
+                    getString(R.string.are_you_sure_you_want_to_look_at_the_material)
 
                 bindingAlert.btnSiLogOut.setOnClickListener {
                     alertDialog.dismiss()
@@ -268,9 +284,15 @@ class MaterialsPickingFragment : Fragment(R.layout.fragment_materials_picking) {
             }
 
             Constants.HOME -> {
-                bindingAlert.tvTitleDialog.text = "¿Desea salir del picking?"
+                bindingAlert.tvTitleDialog.text = getString(R.string.do_you_want_to_exit_picking)
+
                 bindingAlert.btnSiLogOut.setOnClickListener {
-                    requireActivity().startActivity(Intent(requireActivity(), MainActivity::class.java))
+                    requireActivity().startActivity(
+                        Intent(
+                            requireActivity(),
+                            MainActivity::class.java
+                        )
+                    )
                     alertDialog.dismiss()
                 }
             }
@@ -290,7 +312,6 @@ class MaterialsPickingFragment : Fragment(R.layout.fragment_materials_picking) {
         viewModel.checkStevedores(entity)
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun observePicking(id: String): AlertDialog {
         val bindingAlert = DialogObservationBinding.inflate(LayoutInflater.from(requireContext()))
         val builder = AlertDialog.Builder(requireContext())
@@ -298,8 +319,8 @@ class MaterialsPickingFragment : Fragment(R.layout.fragment_materials_picking) {
         val alertDialog = builder.create()
         bindingAlert.tvNroPicking.text = id
         bindingAlert.btnStartLoad.setOnClickListener {
-            if (bindingAlert.edtNbrLot.text.toString() == "") {
-                context?.Toast("Debe ingresar un motivo")
+            if (bindingAlert.edtNbrLot.text.toString() == getString(R.string.empty)) {
+                context?.Toast(getString(R.string.you_must_enter_reason))
             } else {
                 viewModel.observePicking(id, bindingAlert.edtNbrLot.text.toString())
                 alertDialog.dismiss()
@@ -313,11 +334,11 @@ class MaterialsPickingFragment : Fragment(R.layout.fragment_materials_picking) {
         val builder = AlertDialog.Builder(requireContext())
         builder.setView(bindingAlert.root)
         val alertDialog = builder.create()
-        bindingAlert.tvTitle.text = "Material: "
+        bindingAlert.tvTitle.text = getString(R.string.material)
         bindingAlert.tvNroPicking.text = material?.material
         bindingAlert.btnStartLoad.setOnClickListener {
             if (bindingAlert.edtNbrLot.text.toString() == "") {
-                context?.Toast("Debe ingresar un motivo")
+                context?.Toast(getString(R.string.you_must_enter_reason))
             } else {
                 viewModel.observeMaterial(material, bindingAlert.edtNbrLot.text.toString())
                 alertDialog.dismiss()
@@ -333,11 +354,11 @@ class MaterialsPickingFragment : Fragment(R.layout.fragment_materials_picking) {
         val alertDialog = builder.create()
         bindingAlert.tvNameProduct.text = entity.material
         bindingAlert.btnStartLoad.setOnClickListener {
-            if(bindingAlert.edtNbrLot.text.isNotEmpty()){
+            if (bindingAlert.edtNbrLot.text.isNotEmpty()) {
                 viewModel.startLoad(entity, bindingAlert.edtNbrLot.text.toString())
                 alertDialog.dismiss()
-            }else{
-                context?.Toast("Debe ingresar un número de lote")
+            } else {
+                context?.Toast(getString(R.string.you_must_enter_lot_number))
             }
         }
         return alertDialog
@@ -380,5 +401,4 @@ class MaterialsPickingFragment : Fragment(R.layout.fragment_materials_picking) {
         }
         return alertDialog
     }
-
 }

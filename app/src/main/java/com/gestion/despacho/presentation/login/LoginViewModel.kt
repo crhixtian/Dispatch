@@ -1,14 +1,14 @@
-package com.gestion.gestionmantenimientosoftware.Presentation.Login
+package com.gestion.despacho.presentation.login
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.gestion.gestionmantenimientosoftware.Model.User
-import com.gestion.gestionmantenimientosoftware.Repository.Login.LoginRepository
-import com.gestion.gestionmantenimientosoftware.Repository.Login.LoginRepositoryImp
-import com.gestion.gestionmantenimientosoftware.Utils.OperationResult
-import com.gestion.gestionmantenimientosoftware.Utils.SessionManager
+import com.gestion.despacho.model.User
+import com.gestion.despacho.repository.login.LoginRepository
+import com.gestion.despacho.repository.login.LoginRepositoryImp
+import com.gestion.despacho.utils.OperationResult
+import com.gestion.despacho.utils.SessionManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -24,10 +24,10 @@ class LoginViewModel: ViewModel() {
     private var _user: MutableLiveData<User> = MutableLiveData()
     val user: LiveData<User> = _user
 
-    var loginRepository: LoginRepository = LoginRepositoryImp()
+    private var loginRepository: LoginRepository = LoginRepositoryImp()
 
     fun authenticate(user: String, pass: String){
-        viewModelScope.launch(Dispatchers.Main) {
+        viewModelScope.launch {
             try{
                 _loader.value = true
                 val response = withContext(Dispatchers.IO){

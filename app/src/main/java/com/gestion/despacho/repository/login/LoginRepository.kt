@@ -1,7 +1,7 @@
-package com.gestion.gestionmantenimientosoftware.Repository.Login
+package com.gestion.despacho.repository.login
 
-import com.gestion.gestionmantenimientosoftware.Model.LoginDto
-import com.gestion.gestionmantenimientosoftware.Utils.OperationResult
+import com.gestion.despacho.model.LoginDto
+import com.gestion.despacho.utils.OperationResult
 
 interface LoginRepository {
 

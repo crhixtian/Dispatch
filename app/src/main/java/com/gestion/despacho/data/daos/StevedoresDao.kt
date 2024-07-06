@@ -1,4 +1,4 @@
-package com.gestion.gestionmantenimientosoftware.Data.Daos
+package com.gestion.despacho.data.daos
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
@@ -6,7 +6,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
-import com.gestion.gestionmantenimientosoftware.Model.ClsStevedores
+import com.gestion.despacho.model.ClsStevedores
 
 @Dao
 interface StevedoresDao {
