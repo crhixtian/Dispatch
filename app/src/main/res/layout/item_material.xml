@@ -16,11 +16,11 @@
             style="@style/TextColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/nunito_regular"
             android:text="@string/title_Product"
-            android:textSize="15sp"
+            android:textSize="@dimen/size_text"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,8 +32,8 @@
             android:layout_marginEnd="16dp"
             android:ems="2"
             android:fontFamily="@font/nunito_bold"
-            android:text="HUECO 15 RAYA P2"
-            android:textSize="15sp"
+            android:text="@string/hueco_15_raya_p2"
+            android:textSize="@dimen/size_text"
             app:layout_constraintBottom_toBottomOf="@+id/textView3"
             app:layout_constraintEnd_toStartOf="@+id/btnAddStvedor"
             app:layout_constraintStart_toStartOf="@+id/guideline18"
@@ -44,11 +44,11 @@
             style="@style/TextColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/nunito_regular"
             android:text="@string/title_quantity"
-            android:textSize="15sp"
+            android:textSize="@dimen/size_text"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -59,7 +59,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/nunito_bold"
             android:text="1200"
-            android:textSize="15sp"
+            android:textSize="@dimen/size_text"
             app:layout_constraintBottom_toBottomOf="@+id/textView5"
             app:layout_constraintEnd_toStartOf="@+id/guideline10"
             app:layout_constraintStart_toStartOf="@+id/guideline18"
@@ -71,11 +71,11 @@
             style="@style/TextColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/nunito_regular"
             android:text="@string/title_weight"
-            android:textSize="15sp"
+            android:textSize="@dimen/size_text"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
@@ -84,14 +84,12 @@
             style="@style/TextColor"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:fontFamily="@font/nunito_bold"
             android:text="7.8"
-            android:textSize="15sp"
+            android:textSize="@dimen/size_text"
             app:layout_constraintBottom_toBottomOf="@+id/textView7"
             app:layout_constraintEnd_toStartOf="@+id/guideline10"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/textView7"
+            app:layout_constraintStart_toStartOf="@+id/guideline18"
             app:layout_constraintTop_toTopOf="@+id/textView7" />
 
         <TextView
@@ -99,11 +97,11 @@
             style="@style/TextColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/nunito_regular"
             android:text="@string/tv_observation"
-            android:textSize="15sp"
+            android:textSize="@dimen/size_text"
             android:visibility="visible"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvStart" />
@@ -113,11 +111,10 @@
             style="@style/TextColor"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
             android:ems="3"
             android:fontFamily="@font/nunito_bold"
             android:text="-"
-            android:textSize="15sp"
+            android:textSize="@dimen/size_text"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="@+id/textView9"
             app:layout_constraintEnd_toEndOf="parent"
@@ -130,7 +127,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.47" />
+            app:layout_constraintGuide_percent="0.48" />
 
         <TextView
             android:id="@+id/textView11"
@@ -139,7 +136,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/nunito_regular"
             android:text="@string/title_type_load"
-            android:textSize="15sp"
+            android:textSize="@dimen/size_text"
             app:layout_constraintStart_toStartOf="@+id/guideline10"
             app:layout_constraintTop_toTopOf="@+id/tvQuantity" />
 
@@ -150,7 +147,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/nunito_bold"
             android:text="Paleta"
-            android:textSize="15sp"
+            android:textSize="@dimen/size_text"
             app:layout_constraintBottom_toBottomOf="@+id/textView11"
             app:layout_constraintStart_toStartOf="@+id/guideline20"
             app:layout_constraintTop_toTopOf="@+id/textView11"
@@ -164,7 +161,7 @@
             android:layout_marginTop="16dp"
             android:fontFamily="@font/nunito_regular"
             android:text="@string/title_ton"
-            android:textSize="15sp"
+            android:textSize="@dimen/size_text"
             app:layout_constraintStart_toStartOf="@+id/guideline10"
             app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
@@ -175,7 +172,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/nunito_bold"
             android:text="9.4"
-            android:textSize="15sp"
+            android:textSize="@dimen/size_text"
             app:layout_constraintBottom_toBottomOf="@+id/textView13"
             app:layout_constraintStart_toStartOf="@+id/guideline20"
             app:layout_constraintTop_toTopOf="@+id/textView13"
@@ -186,11 +183,11 @@
             style="@style/TextColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="12dp"
             android:fontFamily="@font/nunito_regular"
             android:text="@string/title_start"
-            android:textSize="15sp"
+            android:textSize="@dimen/size_text"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
@@ -216,7 +213,7 @@
             android:layout_marginTop="12dp"
             android:fontFamily="@font/nunito_regular"
             android:text="@string/title_end"
-            android:textSize="15sp"
+            android:textSize="@dimen/size_text"
             app:layout_constraintStart_toStartOf="@+id/guideline10"
             app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
@@ -227,7 +224,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/nunito_bold"
             android:text="25/05/2023 00:00:00"
-            android:textSize="15sp"
+            android:textSize="@dimen/size_text"
             app:layout_constraintBottom_toBottomOf="@+id/tvFin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline20"

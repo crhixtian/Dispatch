@@ -6,7 +6,7 @@
     style="@style/BackgroundCarbon"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Presentation.InfoPicking.InfoPickingFragment">
+    tools:context=".presentation.infoPicking.InfoPickingFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"

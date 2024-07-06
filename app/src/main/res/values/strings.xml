@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">GestionMantenimientoSoftware</string>
+    <string name="app_name">Despach</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hint_user_name">Usuario</string>
     <string name="hint_password">Contraseña</string>
@@ -71,4 +71,26 @@
     <string name="middle_dash">-</string>
     <string name="pdf">pdf</string>
     <string name="_0080287561">0080287561</string>
+    <string name="api">api</string>
+    <string name="hueco_15_raya_p2">HUECO 15 RAYA P2</string>
+
+    <string name="do_you_want_to_exit_the_application">¿Desea salir de la aplicación?</string>
+    <string name="scan_picking_number">Escanea un número de picking</string>
+    <string name="cancelled">Cancelado</string>
+    <string name="do_you_want_to_exit_picking">¿Desea salir del picking?</string>
+    <string name="loading_finished">Se finalizó la carga</string>
+    <string name="you_must_first_start_loading_the_material">Primero debe iniciar la carga del material</string>
+    <string name="are_you_sure_you_want_to_log_out">¿Seguro que desea cerrar sesión?</string>
+    <string name="you_must_enter_lot_number">Debe ingresar un número de lote</string>
+    <string name="material">"Material: "</string>
+    <string name="you_must_enter_reason">Debe ingresar un motivo</string>
+    <string name="are_you_sure_you_want_to_look_at_the_material">¿Seguro que desea observar el material?</string>
+    <string name="are_you_sure_you_want_to_look_at_the_picking">¿Seguro que desea observar el picking?</string>
+    <string name="are_you_sure_you_want_to_validate_the_picking">¿Seguro que desea validar el picking?</string>
+    <string name="empty" />
+    <string name="error_recibir_correos">Error al recibir correos</string>
+    <string name="material_observado_correctamente">Material observado correctamente</string>
+    <string name="seguro_desea_cerrar_sesion">¿Seguro que desea cerrar sesión?</string>
+    <string name="barra">" | "</string>
+
 </resources>

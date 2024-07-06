@@ -10,25 +10,21 @@ import com.gestion.gestionmantenimientosoftware.databinding.FragmentInfoUserBind
 
 class InfoUserFragment : Fragment(R.layout.fragment_info_user) {
 
-    lateinit var binding: FragmentInfoUserBinding
-    lateinit var globalUser: User
+    private lateinit var binding: FragmentInfoUserBinding
+    private lateinit var globalUser: User
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentInfoUserBinding.bind(view)
-    }
 
-    @Deprecated("Deprecated in Java")
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+        arguments?.let { args ->
+            globalUser = args.getSerializable(Constants.USER_LOGIN) as? User ?: return@let
 
-        if(arguments != null){
-            globalUser = arguments!!.getSerializable(Constants.USER_LOGIN) as User
-
-            binding.tvFullName.text = globalUser.FullName
-            binding.TvRolName.text = globalUser.RolName
-            binding.tvUserName.text = globalUser.User
-            binding.tvVersion.text = Constants.APP_VERSION
+            with(binding) {
+                tvFullName.text = globalUser.FullName
+                TvRolName.text = globalUser.RolName
+                tvUserName.text = globalUser.User
+            }
         }
     }
 }

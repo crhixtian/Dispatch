@@ -1,9 +1,9 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="Base.Theme.GestionMantenimientoSoftware" parent="Theme.Material3.DayNight.NoActionBar"></style>
+    <style name="Base.Theme.Despacho" parent="Theme.Material3.DayNight.NoActionBar"></style>
 
     <!-- Base application theme. -->
-    <style name="Theme.GestionMantenimientoSoftware" parent="Base.Theme.GestionMantenimientoSoftware">
+    <style name="Theme.Despacho" parent="Base.Theme.Despacho">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/orange_principal</item>
         <item name="colorPrimaryVariant">@color/gray</item>
@@ -98,5 +98,40 @@
         <item name="cornerRadius">15dp</item>
         <item name="android:textSize">15sp</item>
         <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="StyleGuidelineHorizontal">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="StyleGuidelineVertical">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="StyleTextViewBlack">
+        <item name="android:textColor">@color/black</item>
+        <item name="fontFamily">@font/nunito_black</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="StyleTextView">
+        <item name="android:textColor">@color/black</item>
+        <item name="fontFamily">@font/nunito_regular</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="ImageProfileRound">
+        <item name="cornerSizeTopRight">50dp</item>
+        <item name="cornerSizeBottomRight">50dp</item>
+        <item name="cornerSizeBottomLeft">50dp</item>
+        <item name="cornerSizeTopLeft">50dp</item>
     </style>
 </resources>

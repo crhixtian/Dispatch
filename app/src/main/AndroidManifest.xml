@@ -14,7 +14,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-        android:name=".Application.App"
+        android:name=".application.App"
         android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -23,15 +23,15 @@
         android:label="@string/app_name"
         android:requestLegacyExternalStorage="true"
         android:supportsRtl="true"
-        android:theme="@style/Theme.GestionMantenimientoSoftware"
+        android:theme="@style/Theme.Despacho"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".Presentation.Picking.PickingActivity"
+            android:name=".presentation.picking.PickingActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".Presentation.ValidatedPicking.ValidatedPickingActivity"
+            android:name=".presentation.validatedPicking.ValidatedPickingActivity"
             android:exported="true"
             android:screenOrientation="portrait"/>
         <activity

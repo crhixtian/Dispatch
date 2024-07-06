@@ -12,6 +12,6 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "GestionMantenimientoSoftware"
+rootProject.name = "Despacho"
 include ':app'
 include ':mailing'

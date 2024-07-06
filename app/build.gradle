@@ -3,26 +3,26 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
-    id 'org.sonarqube' version '4.2.1.3168'
+    id 'org.sonarqube' version '5.0.0.4638'
 }
 
 sonar {
     properties {
-        property('sonar.projectKey', 'MantenimientoSoftware')
-        property('sonar.organization', 'MantenimientoSoftware')
+        property('sonar.projectKey', 'Despacho')
+        property('sonar.organization', 'Despacho')
         property('sonar.host.url', 'http://localhost:9000')
-        property('sonar.token', 'sqp_1d14f40b9090b93a6b947f840f1b864ddf6b48c5')
+        property('sonar.token', 'sqp_ac08f1231de829cb3dc9fa4fd12f7156dc8a0dc3')
     }
 }
 
 android {
-    namespace 'com.gestion.gestionmantenimientosoftware'
-    compileSdk 33
+    namespace 'com.gestion.despacho'
+    compileSdk 34
 
     defaultConfig {
-        applicationId "com.gestion.gestionmantenimientosoftware"
+        applicationId "com.gestion.despacho"
         minSdk 27
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 

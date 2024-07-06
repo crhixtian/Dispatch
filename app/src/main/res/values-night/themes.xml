@@ -1,8 +1,8 @@
 <resources>
 
-    <style name="Base.Theme.GestionMantenimientoSoftware" parent="Theme.Material3.DayNight.NoActionBar"></style>
+    <style name="Base.Theme.Despacho" parent="Theme.Material3.DayNight.NoActionBar"></style>
 
-    <style name="Theme.GestionMantenimientoSoftware" parent="Base.Theme.GestionMantenimientoSoftware">
+    <style name="Theme.Despacho" parent="Base.Theme.Despacho">
         <item name="android:statusBarColor">@color/carbon</item>
         <item name="colorPrimary">@color/orange_principal</item>
         <item name="colorOnSecondary">@color/white</item>
@@ -96,5 +96,21 @@
         <item name="backgroundTint">@color/orange_principal</item>
         <item name="android:textSize">15sp</item>
         <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="StyleTextViewBlack">
+        <item name="android:textColor">@color/white</item>
+        <item name="fontFamily">@font/nunito_black</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="StyleTextView">
+        <item name="android:textColor">@color/white</item>
+        <item name="fontFamily">@font/nunito_regular</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
     </style>
 </resources>

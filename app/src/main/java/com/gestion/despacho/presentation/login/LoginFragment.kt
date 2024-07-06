@@ -21,9 +21,8 @@ import com.gestion.gestionmantenimientosoftware.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
 
-    lateinit var binding: FragmentLoginBinding
-    lateinit var globalView: View
-    lateinit var globalUser: User
+    private lateinit var binding: FragmentLoginBinding
+    private lateinit var globalView: View
     private val viewModel: LoginViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -32,17 +31,32 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         binding = FragmentLoginBinding.bind(view)
         globalView = view
 
-        validateSession()
+        //validateSession()
+        dummySession()
+
         init()
         events()
         observers()
+    }
+
+    private fun dummySession() {
+        val user = User(
+            User = "crhixtian",
+            FullName = "Crhistian Villantoy",
+            RolId = 1,
+            RolCode = "ROL",
+            RolName = "Verificador"
+        )
+        val direction =
+            LoginFragmentDirections.actionLoginFragmentToConsultPickingFragment(user)
+        Navigation.findNavController(globalView).navigate(direction)
+
     }
 
     private fun init() = with(binding) {
         tvVersion.text = Constants.APP_VERSION
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun events() = with(binding) {
         btnLogin.setOnClickListener {
             if (edtUser.editText?.text!!.isNotEmpty() && edtPass.editText?.text!!.isNotEmpty()) {
